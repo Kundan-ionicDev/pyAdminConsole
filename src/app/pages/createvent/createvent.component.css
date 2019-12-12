@@ -1,3 +1,7 @@
 #content {
     background-color:'#FAA';
   }
+
+  invalid-feedback{
+    color: red;
+  }

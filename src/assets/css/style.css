@@ -2036,7 +2036,7 @@ h2.form-heading {
   width: 100%;
 }
 body#login{
-  background: url(../images/bg.jpg)no-repeat;
+  background: url(images/bg.jpg)no-repeat;
   background-size:cover;
   -webkit-background-size:cover;
   -moz-background-size:cover;

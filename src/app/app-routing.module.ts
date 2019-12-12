@@ -5,6 +5,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateventComponent } from './pages/createvent/createvent.component';
 import { MainComponent } from './pages/main/main.component';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
+import { VieweventsComponent } from './pages/viewevents/viewevents.component';
+import { ViewusersComponent } from './pages/viewusers/viewusers.component';
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
     { path: 'createevent', component: CreateventComponent },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'pagenotfound', component: PagenotfoundComponent }
+    { path: 'pagenotfound', component: PagenotfoundComponent },
+    { path: 'viewevents', component: VieweventsComponent },
+    { path: 'viewusers', component: ViewusersComponent }
   ] },
 ];
 
