@@ -2,13 +2,18 @@
   <div class="graphs">
     <div class="xs">
       <h3>Create Event</h3>
-    <div class="tab-content">
+      <div class="tab-content">
         <div class="tab-pane active">
-          <form class="form-horizontal">
+          <!-- <form class="form-horizontal"> -->
+          <form role="form" [formGroup]="createeventForm" (ngSubmit)="generateQR()" class="form-horizontal">
             <div class="form-group">
-              <label for="focusedinput" class="col-sm-2 control-label">Name</label>
+              <label for="focusedinput" class="col-sm-2 control-label">Name *</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control1" id="focusedinput" placeholder="Name">
+                <input type="text" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                    <div *ngIf="f.Name.errors.required">Name is required</div>
+                    <div *ngIf="f.Name.errors.email">Name must be a valid</div>
+                </div>
               </div>
               <div class="col-sm-2">
                 <p class="help-block">Your help text!</p>
@@ -17,20 +22,29 @@
             <div class="form-group">
               <label for="disabledinput" class="col-sm-2 control-label">Description</label>
               <div class="col-sm-8">
-                <input disabled="" type="text" class="form-control1" id="disabledinput" placeholder="Description">
+                <input type="text" formControlName="description" class="form-control1" id="disabledinput" placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                    <div *ngIf="f.description.errors.required">Description is required</div>
+                    <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
+                </div>
               </div>
             </div>
 
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Duration</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control1" id="inputPassword" placeholder="Duration">
+                <input type="text" formControlName="duration" class="form-control1" id="inputPassword" placeholder="Duration" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" />
+                <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
+                    <div *ngIf="f.duration.errors.required">Event Duration is required</div>
+                    <!-- <div *ngIf="f.duration.errors.email">Name must be a valid</div> -->
+                </div>
               </div>
             </div>
 
             <div class="form-group">
               <label for="selector1" class="col-sm-2 control-label">Category</label>
-              <div class="col-sm-8"><select name="selector1" id="selector1" class="form-control1">
+              <div class="col-sm-8">
+                <select name="selector1" id="selector1" formControlName="category" class="form-control1">
                   <option>Conferences.</option>
                   <option>Seminars</option>
                   <option>Meetings</option>
@@ -45,13 +59,21 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Address</label>
               <div class="col-sm-8">
-                <textarea name="txtarea1" id="txtarea1" cols="100" rows="20" class="form-control1"></textarea>
+                <textarea name="txtarea1" formControlName="address" id="txtarea1" cols="100" rows="20" class="form-control1" ></textarea>
+                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                    <div *ngIf="f.address.errors.required">Address is required</div>
+                    <!-- <div *ngIf="f.address.errors.email">Name must be a valid</div> -->
+                </div>
               </div>
             </div>
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max Admittance</label>
               <div class="col-sm-8">
-                <input type="number" class="form-control1" id="inputPassword" placeholder="Max Admittance">
+                <input type="number" formControlName="admittance" class="form-control1" id="inputPassword" placeholder="Max Admittance" [ngClass]="{ 'is-invalid': submitted && f.admittance.errors }">
+                <div *ngIf="submitted && f.admittance.errors" class="invalid-feedback">
+                    <div *ngIf="f.admittance.errors.required">Max Admittance is required</div>
+                    <!-- <div *ngIf="f.admittance.errors.email">Name must be a valid</div> -->
+                </div>
               </div>
             </div>
 
@@ -59,7 +81,11 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max User Limit</label>
               <div class="col-sm-8">
-                <input type="number" class="form-control1" id="inputPassword" placeholder="Max User Limit">
+                <input type="number" formControlName="userlimit" class="form-control1" id="inputPassword" placeholder="Max User Limit" [ngClass]="{ 'is-invalid': submitted && f.userlimit.errors }" >
+                <div *ngIf="submitted && f.userlimit.errors" class="invalid-feedback">
+                    <div *ngIf="f.userlimit.errors.required">Max User Limit is required</div>
+                    <!-- <div *ngIf="f.userlimit.errors.email">Name must be a valid</div> -->
+                </div>
               </div>
             </div>
 
@@ -67,130 +93,114 @@
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Fee Options</label>
               <div class="col-sm-8">
-                <div class="radio block"><label><input type="radio"> Free </label></div>
-                <div class="radio block"><label><input type="radio"> Paid</label></div>
-                <div class="radio block"><label><input type="radio"> Standard</label></div>
-                <div class="radio block"><label><input type="radio"> Dynamic</label></div>
+                <div class="radio block"><label><input type="radio" name="option" formControlName="option" value="free"> Free </label></div>
+                <div class="radio block"><label><input type="radio" name="option" formControlName="option" value="paid"> Paid</label></div>
               </div>
             </div>
-
 
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Admittance Type</label>
               <div class="col-sm-8">
-                <div class="radio block"><label><input type="radio"> Single Entry</label></div>
-                <div class="radio block"><label><input type="radio"> Multiple Entry</label></div>
+                <div class="radio block"><label><input type="radio" name="admittype" formControlName="admittype" value="single"> Single Entry</label></div>
+                <div class="radio block"><label><input type="radio" name="admittype" formControlName="admittype" value="multiple"> Multiple Entry</label></div>
               </div>
             </div>
+
+            <div class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-8 col-sm-offset-2">
+                    <!-- <button class="btn-success btn" (click)="generateQR()">Submit</button> &nbsp; -->
+                    <button class="btn-success btn" >Submit</button> &nbsp;
+                    <button class="btn-default btn">Cancel</button>&nbsp;
+                    <button class="btn-inverse btn">Reset</button>
+                  </div>
+        
+                </div>
+              </div>
           </form>
         </div>
       </div>
+      <!-- <div class="bs-example" > -->
+      <!-- Generate PDF -->
+      <!-- <div #content id="content"> -->
+      <div class="container" *ngIf="display" #content id="content" style="background-color: #ffff;">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title"><strong>Event Details</strong></h3>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-condensed">
+                    <tr>
+                      <td>
+                        <b>Event Name :</b>
+                      </td>
+                      <td>
+                        Arjit
+                      </td>
+                    </tr>
 
-      <div class="panel-body">
-        <form role="form" class="form-horizontal">
-          <div class="form-group">
-            <label class="col-md-2 control-label">Input Processing</label>
-            <div class="col-md-8">
-              <div class="input-icon right spinner">
-                <i class="fa fa-fw fa-spin fa-spinner"></i>
-                <input id="email" class="form-control1" type="text" placeholder="Processing...">
+                    <tr>
+                      <td>
+                        <b>Event Description :</b>
+                      </td>
+                      <td>
+                        Arijit Singh Live in Mumbai | One Night Only 2020 | Sign up for Early Access
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <b>Event Venue :</b>
+                      </td>
+                      <td>
+                        Jio Garden, BKC, Mumbai,Pt No: RG1A, G Block, Bandra Kurla Complex, Bandra East, Mumbai,
+                        Maharashtra
+                        400051
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Start:</b>
+                      </td>
+                      <td>
+                        January 25 | 7PM
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Price: </b></td>
+                      <td>Rs. 1200/-</td>
+                    </tr>
+                    <tr>
+                      <td><b>Categories:</b></td>
+                      <td>Music</td>
+                    </tr>
+                    <tr>
+                      <td><b>Tags:</b></td>
+                      <td>bollywood, music, concert</td>
+                    </tr>
+                    <tr>
+                      <td>
+
+                      </td>
+                      <td>
+                        <ngx-qrcode *ngIf="display" [qrc-element-type]="img" [qrc-value]="value">
+                        </ngx-qrcode><br>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
-            <div class="col-sm-2">
-              <p class="help-block">Processing right</p>
-            </div>
           </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Static Paragraph</label>
-            <div class="col-md-8">
-              <p class="form-control1 m-n">email@example.com</p>
-            </div>
-          </div>
-          <div class="form-group mb-n">
-            <label class="col-md-2 control-label">Readonly</label>
-            <div class="col-md-8">
-              <input type="text" class="form-control1" placeholder="Readonly" readonly="">
-            </div>
-          </div>
-        </form>
-      </div>
-      <!-- <div class="bs-example" > -->
-        <!-- Generate PDF -->
-        <div #content id="content">
-          <table>
-            <tr>
-              <td>
-                <b>Event Name :</b>
-              </td>
-              <td>
-                Arjit
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>Event Description :</b>
-              </td>
-              <td>
-                Arijit Singh Live in Mumbai | One Night Only 2020 | Sign up for Early Access
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>Event Venue :</b>
-              </td>
-              <td>
-                Jio Garden, BKC, Mumbai,Pt No: RG1A, G Block, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra
-                400051
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>Start:</b>
-              </td>
-              <td>
-                January 25 | 7PM
-              </td>
-            </tr>
-            <tr>
-              <td><b>Price: </b></td>
-              <td>Rs. 1200/-</td>
-            </tr>
-            <tr>
-              <td><b>Categories:</b></td>
-              <td>Music</td>
-            </tr>
-            <tr>
-              <td><b>Tags:</b></td>
-              <td>bollywood, music, concert</td>
-            </tr>
-            <tr>
-              <td>
-               
-              </td>
-              <td>
-                <ngx-qrcode *ngIf="display" [qrc-element-type]="img" [qrc-value]="value">
-                </ngx-qrcode><br>
-              </td>
-            </tr>
-          </table>
-         
         </div>
         <div class="panel-footer">
-          <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-              <button class="btn-success btn" (click)="generateQR()">Submit</button>
-              <button class="btn-default btn">Cancel</button>
-              <button class="btn-inverse btn">Reset</button>
-            </div>
-          
-          </div>
+          <a *ngIf="display" (click)="makePdf()" download>Download and Print Event Details</a>
         </div>
-       <div class="panel-footer">
-          <a *ngIf="display" (click)="makePdf()" download>Download and print Event Details</a>
-       </div>
-      <!-- </div> -->
+      </div>
+
+     
     </div>
   </div>
-</div>

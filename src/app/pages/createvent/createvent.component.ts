@@ -3,6 +3,7 @@ import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 declare var $: any;
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 export class NgxQrCode {
   text: string;
@@ -21,8 +22,11 @@ export class CreateventComponent implements OnInit {
   display = false;
   public myAngularxQrCode: string = this.qrcodename;
   public qrdata: string = null;
+  createeventForm: FormGroup;
+  submitted: boolean;
 
   constructor(
+    private formBuilder: FormBuilder,
     public api: EventsapiService
   ) {
     this.myAngularxQrCode = this.qrcodename;
@@ -30,40 +34,70 @@ export class CreateventComponent implements OnInit {
 
   ngOnInit() {
     $("#content").hide();
+    this.createeventForm = this.formBuilder.group({
+      Name: new FormControl('', Validators.required),
+      description: new FormControl('',Validators.required),
+      duration: new FormControl('',Validators.required),
+      category: new FormControl('',Validators.required),
+      address: new FormControl('',Validators.required),
+      admittance: new FormControl('',Validators.required),
+      userlimit: new FormControl('',Validators.required),
+      option : new FormControl('',Validators.required),
+      admittype : new FormControl('',Validators.required),
+    });
+
   }
 
-  generateQR(){
-    let params = {
-      "Name":"A Musical Extravaganza - A Tribute Concert to Celia Lobo","Description":"Celia Lobo Academy of Voice (CLAV), Furtados, Royal Opera House, Mumbai and Avid Learning present A Musical Extravaganza: A Tribute Concert To Celia Lobo, celebrating India’s only living Opera Diva –  Opera Singer, Vocal Coach & Mentor and Stage Director Celia Lobo.","Category":"Music","Duration":"2 Hours","Location":"The Royal Opera House, Mumbai","Address":"Mathew Rd, Opera House, Girgaon, Mumbai, Maharashtra 400004","ContactDetails":"7586980868","MaxAdmittance":"500",
-      "MaxUserLimit":"550","TicketIssuance":"Individual","FeeOptions":"Free","AdmittanceType":"Single"
-    }
+  // convenience getter for easy access to form fields
+  get f() { return this.createeventForm.controls; }
 
-    this.api._postAPI('registerEvent',params).pipe(
-      catchError(err => {
-          alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
-        res  => {
-          alert('HTTP response'+ JSON.stringify(res) + res._id)
-          //  $("#content").show();
-          if (this.qrcodename == '') {
-            this.display = false;
-            alert("Please enter the name");
-            return;
-          } else {
-            this.value = this.qrcodename + res._id;
-            this.display = true;
+  generateQR(){
+    this.submitted = true;
+    if(this.createeventForm.valid){
+      console.log('form::', this.createeventForm);
+      let params = {
+        "Name": this.createeventForm.value.Name,
+        "Description": this.createeventForm.value.description,
+        "Category": this.createeventForm.value.category,
+        "Duration": this.createeventForm.value.duration,
+        "Location": this.createeventForm.value.address,
+        "Address":this.createeventForm.value.address,
+        "ContactDetails":'Team India',
+        "MaxAdmittance": this.createeventForm.value.admittance,
+        "MaxUserLimit":this.createeventForm.value.userlimit,
+        "TicketIssuance":"Individual",
+        "FeeOptions": this.createeventForm.value.option,
+        "AdmittanceType": this.createeventForm.value.admittype
+      };
+  
+      this.api._postAPI('registerEvent',params).pipe(
+        catchError(err => {
+            // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
+            return throwError(err);
+        })
+      )
+      .subscribe(
+          res  => {
+            // alert('HTTP response'+ JSON.stringify(res) + res._id)
+            //  $("#content").show();
+            if (this.qrcodename == '') {
+              this.display = false;
+              // alert("Please enter the name");
+              return;
+            } else {
+              this.value = this.qrcodename + res._id;
+              this.display = true;
+            }
+          },
+          err => {
+            if(err.length >0){
+              //alert('HTTP Error'+ err)
+            }
           }
-        },
-        err => {
-          if(err.length >0){
-            alert('HTTP Error'+ err)
-          }
-        },
-        () => alert('HTTP request completed...')
-    );
+      );
+    }else{
+      alert('Please fill details...');
+    }
   }
 
   

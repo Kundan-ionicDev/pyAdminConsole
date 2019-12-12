@@ -26,7 +26,7 @@
           </li>
           <li class="avatar">
             <a href="#">
-              <img src="images/1.png" alt="" />
+              <img src="../../../assets/images/1.png" alt="" />
               <div>New message</div>
               <small>1 minute ago</small>
               <span class="label label-info">NEW</span>
@@ -34,7 +34,7 @@
           </li>
           <li class="avatar">
             <a href="#">
-              <img src="images/2.png" alt="" />
+              <img src="../../../assets/images/2.png" alt="" />
               <div>New message</div>
               <small>1 minute ago</small>
               <span class="label label-info">NEW</span>
@@ -42,28 +42,28 @@
           </li>
           <li class="avatar">
             <a href="#">
-              <img src="images/3.png" alt="" />
+              <img src="../../../assets/images/3.png" alt="" />
               <div>New message</div>
               <small>1 minute ago</small>
             </a>
           </li>
           <li class="avatar">
             <a href="#">
-              <img src="images/4.png" alt="" />
+              <img src="../../../assets/images/4.png" alt="" />
               <div>New message</div>
               <small>1 minute ago</small>
             </a>
           </li>
           <li class="avatar">
             <a href="#">
-              <img src="images/5.png" alt="" />
+              <img src="../../../assets/images/5.png" alt="" />
               <div>New message</div>
               <small>1 minute ago</small>
             </a>
           </li>
           <li class="avatar">
             <a href="#">
-              <img src="images/pic1.png" alt="" />
+              <img src="../../../assets/images/pic1.png" alt="" />
               <div>New message</div>
               <small>1 minute ago</small>
             </a>
@@ -141,19 +141,22 @@
             <!-- /.nav-second-level -->
           </li>
           <li>
-            <a href="#"><i class="fa fa-envelope nav_icon"></i>Reports<span class="fa arrow"></span></a>
+            <a><i class="fa fa-envelope nav_icon"></i>Reports<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
-                <a [routerLink]="['pagenotfound']">View Events</a>
+                <a [routerLink]="['viewevents']">View Events</a>
               </li>
               <li>
-                <a [routerLink]="['pagenotfound']">View Users</a>
+                <a [routerLink]="['viewusers']">View Users</a>
               </li>
               <li>
                 <a [routerLink]="['pagenotfound']">Audit Trail</a>
               </li>
             </ul>
             <!-- /.nav-second-level -->
+          </li>
+          <li>
+            <a [routerLink]="['/userAuth']"><i class="fa fa-flask nav_icon"></i>Logout</a>
           </li>
         </ul>
       </div>

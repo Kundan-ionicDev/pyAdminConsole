@@ -13,6 +13,9 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { QRCodeModule } from 'angularx-qrcode';
 import { HttpClientModule } from '@angular/common/http';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { VieweventsComponent } from './pages/viewevents/viewevents.component';
+import { ViewusersComponent } from './pages/viewusers/viewusers.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +26,18 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
     DashboardComponent,
     CreateventComponent,
     MainComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    VieweventsComponent,
+    ViewusersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxQRCodeModule,
     QRCodeModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
