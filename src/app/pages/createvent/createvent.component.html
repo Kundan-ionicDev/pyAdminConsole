@@ -5,14 +5,16 @@
       <div class="tab-content">
         <div class="tab-pane active">
           <!-- <form class="form-horizontal"> -->
+          <!-- <input id="locationTextField" type="text" size="50"> -->
           <form role="form" [formGroup]="createeventForm" (ngSubmit)="generateQR()" class="form-horizontal">
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Name *</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                <input type="text" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
+                  [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
                 <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
-                    <div *ngIf="f.Name.errors.required">Name is required</div>
-                    <div *ngIf="f.Name.errors.email">Name must be a valid</div>
+                  <div *ngIf="f.Name.errors.required">Name is required</div>
+                  <div *ngIf="f.Name.errors.email">Name must be a valid</div>
                 </div>
               </div>
               <div class="col-sm-2">
@@ -22,10 +24,11 @@
             <div class="form-group">
               <label for="disabledinput" class="col-sm-2 control-label">Description</label>
               <div class="col-sm-8">
-                <input type="text" formControlName="description" class="form-control1" id="disabledinput" placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                <input type="text" formControlName="description" class="form-control1" id="disabledinput"
+                  placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
                 <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                    <div *ngIf="f.description.errors.required">Description is required</div>
-                    <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
+                  <div *ngIf="f.description.errors.required">Description is required</div>
+                  <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
                 </div>
               </div>
             </div>
@@ -33,10 +36,11 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Duration</label>
               <div class="col-sm-8">
-                <input type="text" formControlName="duration" class="form-control1" id="inputPassword" placeholder="Duration" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" />
+                <input type="text" formControlName="duration" class="form-control1" id="inputPassword"
+                  placeholder="Duration" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" />
                 <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
-                    <div *ngIf="f.duration.errors.required">Event Duration is required</div>
-                    <!-- <div *ngIf="f.duration.errors.email">Name must be a valid</div> -->
+                  <div *ngIf="f.duration.errors.required">Event Duration is required</div>
+                  <!-- <div *ngIf="f.duration.errors.email">Name must be a valid</div> -->
                 </div>
               </div>
             </div>
@@ -45,6 +49,7 @@
               <label for="selector1" class="col-sm-2 control-label">Category</label>
               <div class="col-sm-8">
                 <select name="selector1" id="selector1" formControlName="category" class="form-control1">
+                  <option value="default">-- Select a Category --</option>
                   <option>Conferences.</option>
                   <option>Seminars</option>
                   <option>Meetings</option>
@@ -52,27 +57,30 @@
                   <option>Press Conferences</option>
                   <option>Product Launches</option>
                   <option>Theme Parties</option>
-                  <option>Team Building Events</option>
-                </select></div>
+                  <option>Team Building Events</option>a
+                </select>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Address</label>
               <div class="col-sm-8">
-                <textarea name="txtarea1" formControlName="address" id="txtarea1" cols="100" rows="20" class="form-control1" ></textarea>
+                <textarea name="txtarea1" formControlName="address" id="txtarea1" cols="100" rows="20"
+                  class="form-control1"></textarea>
                 <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                    <div *ngIf="f.address.errors.required">Address is required</div>
-                    <!-- <div *ngIf="f.address.errors.email">Name must be a valid</div> -->
+                  <div *ngIf="f.address.errors.required">Address is required</div>
+                  <!-- <div *ngIf="f.address.errors.email">Name must be a valid</div> -->
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max Admittance</label>
               <div class="col-sm-8">
-                <input type="number" formControlName="admittance" class="form-control1" id="inputPassword" placeholder="Max Admittance" [ngClass]="{ 'is-invalid': submitted && f.admittance.errors }">
+                <input type="number" formControlName="admittance" class="form-control1" id="inputPassword"
+                  placeholder="Max Admittance" [ngClass]="{ 'is-invalid': submitted && f.admittance.errors }">
                 <div *ngIf="submitted && f.admittance.errors" class="invalid-feedback">
-                    <div *ngIf="f.admittance.errors.required">Max Admittance is required</div>
-                    <!-- <div *ngIf="f.admittance.errors.email">Name must be a valid</div> -->
+                  <div *ngIf="f.admittance.errors.required">Max Admittance is required</div>
+                  <!-- <div *ngIf="f.admittance.errors.email">Name must be a valid</div> -->
                 </div>
               </div>
             </div>
@@ -81,10 +89,10 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max User Limit</label>
               <div class="col-sm-8">
-                <input type="number" formControlName="userlimit" class="form-control1" id="inputPassword" placeholder="Max User Limit" [ngClass]="{ 'is-invalid': submitted && f.userlimit.errors }" >
+                <input type="number" formControlName="userlimit" class="form-control1" id="inputPassword"
+                  placeholder="Max User Limit" [ngClass]="{ 'is-invalid': submitted && f.userlimit.errors }">
                 <div *ngIf="submitted && f.userlimit.errors" class="invalid-feedback">
-                    <div *ngIf="f.userlimit.errors.required">Max User Limit is required</div>
-                    <!-- <div *ngIf="f.userlimit.errors.email">Name must be a valid</div> -->
+                  <div *ngIf="f.userlimit.errors.required">Max User Limit is required</div>
                 </div>
               </div>
             </div>
@@ -93,30 +101,36 @@
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Fee Options</label>
               <div class="col-sm-8">
-                <div class="radio block"><label><input type="radio" name="option" formControlName="option" value="free"> Free </label></div>
-                <div class="radio block"><label><input type="radio" name="option" formControlName="option" value="paid"> Paid</label></div>
+                <div class="radio block"><label><input type="radio" checked="checked" name="option"
+                      formControlName="option" value="free">
+                    Free </label></div>
+                <div class="radio block"><label><input type="radio" disabled name="option" formControlName="option"
+                      value="paid">
+                    Paid</label></div>
               </div>
             </div>
 
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Admittance Type</label>
               <div class="col-sm-8">
-                <div class="radio block"><label><input type="radio" name="admittype" formControlName="admittype" value="single"> Single Entry</label></div>
-                <div class="radio block"><label><input type="radio" name="admittype" formControlName="admittype" value="multiple"> Multiple Entry</label></div>
+                <div class="radio block"><label><input type="radio" name="admittype" formControlName="admittype"
+                      value="single"> Single Entry</label></div>
+                <div class="radio block"><label><input type="radio" name="admittype" formControlName="admittype"
+                      value="multiple"> Multiple Entry</label></div>
               </div>
             </div>
 
             <div class="panel-footer">
-                <div class="row">
-                  <div class="col-sm-8 col-sm-offset-2">
-                    <!-- <button class="btn-success btn" (click)="generateQR()">Submit</button> &nbsp; -->
-                    <button class="btn-success btn" >Submit</button> &nbsp;
-                    <button class="btn-default btn">Cancel</button>&nbsp;
-                    <button class="btn-inverse btn">Reset</button>
-                  </div>
-        
+              <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                  <!-- <button class="btn-success btn" (click)="generateQR()">Submit</button> &nbsp; -->
+                  <button class="btn-success btn">Submit</button> &nbsp;
+                  <button class="btn-default btn">Cancel</button>&nbsp;
+                  <button class="btn-inverse btn">Reset</button>
                 </div>
+
               </div>
+            </div>
           </form>
         </div>
       </div>
@@ -186,11 +200,14 @@
 
                       </td>
                       <td>
-                        <ngx-qrcode *ngIf="display" [qrc-element-type]="img" [qrc-value]="value">
+                        <ngx-qrcode *ngIf="display" [qrc-element-type]="elementType" [qrc-value]="value">
                         </ngx-qrcode><br>
                       </td>
                     </tr>
                   </table>
+                  <p>
+                    <a hred="https://pyquantum.com/">https://pyquantum.com/</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -201,6 +218,15 @@
         </div>
       </div>
 
-     
+
     </div>
   </div>
+  <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrLsZkUS1QwwcfCkUA3x3KqKHDYrP8kBc&libraries=places"></script>
+  <script>
+      function init() {
+          var input = document.getElementById('locationTextField');
+          var autocomplete = new google.maps.places.Autocomplete(input);
+      }
+
+      google.maps.event.addDomListener(window, 'load', init);
+  </script> -->

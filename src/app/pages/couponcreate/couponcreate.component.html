@@ -1,0 +1,199 @@
+<div id="page-wrapper">
+  <div class="graphs">
+    <div class="xs">
+      <h3>Coupon Entry/ Manage</h3>
+      <button (click)="add()" *ngIf="showHide == false" class="btn-success btn">
+        Add
+      </button>
+
+      <button (click)="add()" *ngIf="showHide == true" class="btn-success btn">
+        Show Coupon list
+      </button>
+
+      <div class="container" *ngIf="showHide == false">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="main-box clearfix">
+              <div class="table-responsive">
+                <table class="table user-list">
+                  <thead>
+                    <tr>
+                      <th><span>Sr.No</span></th>
+                      <th><span>Coupon Code</span></th>
+                      <th><span>Description</span></th>
+                      <th><span>Event Name</span></th>
+                      <th><span>Expire</span></th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <td>
+                        1
+                      </td>
+                      <td class="text-center">
+                        BOH232
+                      </td>
+                      <td>
+                        20% OFF YOUR PURCHASE
+                      </td>
+                      <td>
+                        Nishant Suri at Mumbai Comedy Festival
+                      </td>
+                      <td>
+                        Jan 03, 2021
+                      </td>
+                      <td style="width: 20%;">
+                        <!-- <a href="" class="table-link">
+                          <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a> -->
+                        <a href="" class="table-link">
+                          <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                        <a href="" class="table-link danger">
+                          <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        1
+                      </td>
+                      <td class="text-center">
+                        BOH211
+                      </td>
+                      <td>
+                        50% OFF YOUR PURCHASE
+                      </td>
+                      <td>
+                        Arjit Singh Event
+                      </td>
+                      <td>
+                        Jan 03, 2021
+                      </td>
+                      <td style="width: 20%;">
+                        <!-- <a href="" class="table-link">
+                          <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a> -->
+                        <a href="" class="table-link">
+                          <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                        <a href="" class="table-link danger">
+                          <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- <ul class="pagination pull-right">
+                    <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+                    <li><a href="">1</a></li>
+                    <li><a href="">2</a></li>
+                    <li><a href="">3</a></li>
+                    <li><a href="">4</a></li>
+                    <li><a href="">5</a></li>
+                    <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+                  </ul> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" *ngIf="showHide == true">
+        <div class="tab-pane active">
+          <!-- <form class="form-horizontal"> -->
+          <!-- <input id="locationTextField" type="text" size="50"> -->
+          <form role="form" [formGroup]="couponForm" (ngSubmit)="add()" class="form-horizontal">
+            <div class="form-group">
+              <label for="focusedinput" class="col-sm-2 control-label">Coupon Code *</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
+                  [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                  <div *ngIf="f.Name.errors.required">Name is required</div>
+                  <div *ngIf="f.Name.errors.email">Name must be a valid</div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2">
+                <p class="help-block">Your help text!</p>
+              </div> -->
+            </div>
+            <div class="form-group">
+              <label for="disabledinput" class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-8">
+                <input type="text" formControlName="description" class="form-control1" id="disabledinput"
+                  placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                  <div *ngIf="f.description.errors.required">Description is required</div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="selector1" class="col-sm-2 control-label">Event For</label>
+              <div class="col-sm-8">
+                <select name="selector1" id="selector1" formControlName="category" class="form-control1">
+                  <option value="default">-- Select Event --</option>
+                  <option>Conferences.</option>
+                  <option>Seminars</option>
+                  <option>Meetings</option>
+                  <option>Trade Shows.</option>
+                  <option>Press Conferences</option>
+                  <option>Product Launches</option>
+                  <option>Theme Parties</option>
+                  <option>Team Building Events</option>a
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputPassword" class="col-sm-2 control-label">Expire Date</label>
+              <div class="col-sm-8">
+                <!-- <textarea name="txtarea1" formControlName="address" id="txtarea1" cols="100" rows="20"
+                  class="form-control1"></textarea> -->
+                <input type="date" formControlName="expiredt"
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                  <div *ngIf="f.address.errors.required">Address is required</div>
+                  <!-- <div *ngIf="f.address.errors.email">Name must be a valid</div> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-footer">
+              <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                  <!-- <button class="btn-success btn" (click)="generateQR()">Submit</button> &nbsp; -->
+                  <button class="btn-success btn">Submit</button> &nbsp;
+                  <button class="btn-default btn">Cancel</button>&nbsp;
+                  <button class="btn-inverse btn">Reset</button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

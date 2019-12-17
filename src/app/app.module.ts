@@ -16,6 +16,9 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { VieweventsComponent } from './pages/viewevents/viewevents.component';
 import { ViewusersComponent } from './pages/viewusers/viewusers.component';
+import { ApplicationadminComponent } from './pages/applicationadmin/applicationadmin.component';
+import { CouponcreateComponent } from './pages/couponcreate/couponcreate.component';
+import { LotteryOneComponent } from './pages/lottery-one/lottery-one.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { ViewusersComponent } from './pages/viewusers/viewusers.component';
     MainComponent,
     PagenotfoundComponent,
     VieweventsComponent,
-    ViewusersComponent
+    ViewusersComponent,
+    ApplicationadminComponent,
+    CouponcreateComponent,
+    LotteryOneComponent
   ],
   imports: [
     BrowserModule,

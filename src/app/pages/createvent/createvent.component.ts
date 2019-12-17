@@ -42,7 +42,7 @@ export class CreateventComponent implements OnInit {
       address: new FormControl('',Validators.required),
       admittance: new FormControl('',Validators.required),
       userlimit: new FormControl('',Validators.required),
-      option : new FormControl('',Validators.required),
+      option : new FormControl('free',Validators.required),
       admittype : new FormControl('',Validators.required),
     });
 
@@ -110,12 +110,13 @@ export class CreateventComponent implements OnInit {
                '</body></html>';
 
     var WindowObject = window.open("", "PrintWindow",
-    "width=1000,height=900,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
-    WindowObject.document.writeln(html);
+    "width=auto,height=auto,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes, _blank");
+    WindowObject.document.writeln(DocumentContainer.innerHTML);
     WindowObject.document.close();
     WindowObject.focus();
     WindowObject.print();
     WindowObject.close();
+    
     document.getElementById('print_link').style.display='block';
   }
 }
