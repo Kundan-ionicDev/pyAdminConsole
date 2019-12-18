@@ -1,0 +1,138 @@
+<!-- 
+<h2 mat-dialog-title>
+    <h3 class="panel-title"><strong>Event Details</strong></h3>
+</h2> -->
+<div class="row p-t-20">
+  <div class="col-md-6">
+    <h3 class="panel-title"><strong>Download and Print Event Details</strong></h3>
+  </div>
+  <div class="col-md-6 text-right">
+    <button (click)="makePdf()" class="btn-success btn">Print
+      <span class="glyphicon glyphicon-print"></span>
+    </button> &nbsp;
+  </div>
+</div>
+<br />
+<!-- <div class="panel-heading">
+    <h3 class="panel-title"><strong>Event Details</strong></h3>
+  </div> -->
+<mat-dialog-content class="mat-typography">
+  <div class="container" #content id="content" style="background-color: #ffff;max-width: 100%;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <!-- <div class="panel-heading">
+                <h3 class="panel-title"><strong>Event Details</strong></h3>
+              </div> -->
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-condensed">
+                <tr>
+                  <td style="width: 200px;">
+                    <b>Event Name :</b>
+                  </td>
+                  <td>
+                    Arjit
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <b>Event Description :</b>
+                  </td>
+                  <td>
+                    Arijit Singh Live in Mumbai | One Night Only 2020 | Sign up for Early Access
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <b>Event Venue :</b>
+                  </td>
+                  <td style="word-wrap:break-word;">
+                    Jio Garden, BKC, Mumbai,Pt No: RG1A, G Block, Bandra Kurla Complex, Bandra East, Mumbai,
+                    Maharashtra
+                    400051
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Start Date:</b>
+                  </td>
+                  <td>
+                    January 25 - 7 PM
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>End Date: </b></td>
+                  <td>
+                    January 25 - 11 PM
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Categories:</b></td>
+                  <td>Music</td>
+                </tr>
+                <tr>
+                  <td><b>Tags:</b></td>
+                  <td>bollywood, music, concert</td>
+                </tr>
+                <tr>
+                  <td>
+
+                  </td>
+                  <td>
+                    <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="value">
+                    </ngx-qrcode><br>
+                  </td>
+                </tr>
+              </table>
+              <!-- <p>
+                    <a hred="https://pyquantum.com/">https://pyquantum.com/</a>
+                  </p> -->
+              <div class="container-fluid">
+                <div class="row-fluid">
+
+                  <h2>Terms of Use</h2>
+                  These Terms and Conditions constitute an agreement (“Agreement”) between you (“you”, “your”, “user”,
+                  “Customer”) and the Company.Avocado gumbo artichoke ricebean groundnut tigernut. Daikon kakadu plum
+                  water spinach garbanzo eggplant fava bean chard rock melon carrot rutabaga water chestnut broccoli
+                  courgette onion.
+
+                  <h2>Eligibility and Identity.</h2>
+                  To be eligible to use our Services, you must be at least 13 years old. Sorrel jícama tomato silver
+                  beet wattle seed black-eyed pea garlic fennel tigernut okra beetroot shallot. Soko shallot melon
+                  dandelion bamboo shoot chickpea soybean pumpkin kakadu plum parsley ricebean grape courgette courgette
+                  jícama tatsoi. Black-eyed pea gourd tomatillo arugula cucumber celery mustard black-eyed pea
+                  cauliflower soybean rutabaga turnip groundnut.
+
+                 
+                  <h2>Privacy</h2>
+                  Please see our <a href="http://www.pyquantum.com/privacy-policy.html">Privacy Policy</a> as set forth on the site.
+
+                  <h2>About These Terms</h2>
+                  <p>These Terms and Conditions are just a sample and are not legally binding. Real Terms of Services do
+                    not (usually) contain vegetables...</p>
+
+                  <footer>
+                    <hr>
+
+                    <!-- Purchase a site license to remove this link from the footer: http://www.portnine.com/bootstrap-themes -->
+                    <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free
+                        Event Ticket</a> by <a href="http://www.pyquantum.com" target="_blank">pyQuantum</a></p>
+
+                    <p>&copy; 2019 <a href="http://www.pyquantum.com" target="_blank">pyQuantum</a></p>
+                  </footer>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="panel-footer">
+      <a *ngIf="display" (click)="makePdf()" download>Download and Print Event Details</a>
+    </div> -->
+  </div>
+</mat-dialog-content>

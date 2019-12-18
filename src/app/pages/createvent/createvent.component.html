@@ -10,21 +10,19 @@
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Name *</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
+                <input type="text" data-toggle="tooltip" title="Enter Event Name!" data-placement="bottom" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
                   [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
                 <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
                   <div *ngIf="f.Name.errors.required">Name is required</div>
                   <div *ngIf="f.Name.errors.email">Name must be a valid</div>
                 </div>
               </div>
-              <div class="col-sm-2">
-                <p class="help-block">Your help text!</p>
-              </div>
             </div>
+
             <div class="form-group">
               <label for="disabledinput" class="col-sm-2 control-label">Description</label>
               <div class="col-sm-8">
-                <input type="text" formControlName="description" class="form-control1" id="disabledinput"
+                <input type="text" data-toggle="tooltip" title="Enter Event Description!" data-placement="bottom" formControlName="description" class="form-control1" id="disabledinput"
                   placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
                 <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
                   <div *ngIf="f.description.errors.required">Description is required</div>
@@ -33,10 +31,35 @@
               </div>
             </div>
 
+
+            <div class="form-group">
+              <label for="focusedinput" class="col-sm-2 control-label">Contact Person *</label>
+              <div class="col-sm-8">
+                <input type="text" data-toggle="tooltip" title="Enter Contact Person Name!" data-placement="bottom" class="form-control1" formControlName="contactpname" id="focusedinput" placeholder="Enter Contact Person Name!"
+                  [ngClass]="{ 'is-invalid': submitted && f.contactpname.errors }" />
+                <div *ngIf="submitted && f.contactpname.errors" class="invalid-feedback">
+                  <div *ngIf="f.contactpname.errors.required">Person name is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="focusedinput" class="col-sm-2 control-label">Contact Number *</label>
+              <div class="col-sm-8">
+                <input type="text" data-toggle="tooltip" title="Enter Contact Person Number !" data-placement="bottom" class="form-control1" formControlName="contactpnumber" id="focusedinput" placeholder="Enter Contact Person Number!"
+                  [ngClass]="{ 'is-invalid': submitted && f.contactpnumber.errors }" />
+                <div *ngIf="submitted && f.contactpnumber.errors" class="invalid-feedback">
+                  <div *ngIf="f.contactpnumber.errors.required">Contact Number is required</div>
+                  <div *ngIf="f.contactpnumber.errors.email">Contact Number must be a valid</div>
+                </div>
+              </div>
+            </div>
+
+
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Duration</label>
               <div class="col-sm-8">
-                <input type="text" formControlName="duration" class="form-control1" id="inputPassword"
+                <input type="text" data-toggle="tooltip" title="Enter Event Duration!" data-placement="bottom" formControlName="duration" class="form-control1" id="inputPassword"
                   placeholder="Duration" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" />
                 <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
                   <div *ngIf="f.duration.errors.required">Event Duration is required</div>
@@ -48,16 +71,16 @@
             <div class="form-group">
               <label for="selector1" class="col-sm-2 control-label">Category</label>
               <div class="col-sm-8">
-                <select name="selector1" id="selector1" formControlName="category" class="form-control1">
+                <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom" name="selector1" id="selector1" formControlName="category" class="form-control1">
                   <option value="default">-- Select a Category --</option>
-                  <option>Conferences.</option>
-                  <option>Seminars</option>
-                  <option>Meetings</option>
-                  <option>Trade Shows.</option>
-                  <option>Press Conferences</option>
-                  <option>Product Launches</option>
-                  <option>Theme Parties</option>
-                  <option>Team Building Events</option>a
+                  <option value="Conferences">Conferences.</option>
+                  <option value="Seminars">Seminars</option>
+                  <option value="Meetings">Meetings</option>
+                  <option value="Trade Shows">Trade Shows.</option>
+                  <option value="Press Conferences">Press Conferences</option>
+                  <option value="Product Launches">Product Launches</option>
+                  <option value="Theme Parties">Theme Parties</option>
+                  <option value="Team Building Events">Team Building Events</option>
                 </select>
               </div>
             </div>
@@ -65,7 +88,7 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Address</label>
               <div class="col-sm-8">
-                <textarea name="txtarea1" formControlName="address" id="txtarea1" cols="100" rows="20"
+                <textarea data-toggle="tooltip" title="Enter Event Venue!" data-placement="bottom" name="txtarea1" formControlName="address" id="txtarea1" cols="100" rows="20"
                   class="form-control1"></textarea>
                 <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                   <div *ngIf="f.address.errors.required">Address is required</div>
@@ -73,10 +96,11 @@
                 </div>
               </div>
             </div>
+
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max Admittance</label>
               <div class="col-sm-8">
-                <input type="number" formControlName="admittance" class="form-control1" id="inputPassword"
+                <input type="number" data-toggle="tooltip" title="Enter Max Admittance!" data-placement="bottom" formControlName="admittance" class="form-control1" id="inputPassword"
                   placeholder="Max Admittance" [ngClass]="{ 'is-invalid': submitted && f.admittance.errors }">
                 <div *ngIf="submitted && f.admittance.errors" class="invalid-feedback">
                   <div *ngIf="f.admittance.errors.required">Max Admittance is required</div>
@@ -89,7 +113,7 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max User Limit</label>
               <div class="col-sm-8">
-                <input type="number" formControlName="userlimit" class="form-control1" id="inputPassword"
+                <input type="number" data-toggle="tooltip" title="Enter Max User Limit!" data-placement="bottom" formControlName="userlimit" class="form-control1" id="inputPassword"
                   placeholder="Max User Limit" [ngClass]="{ 'is-invalid': submitted && f.userlimit.errors }">
                 <div *ngIf="submitted && f.userlimit.errors" class="invalid-feedback">
                   <div *ngIf="f.userlimit.errors.required">Max User Limit is required</div>
@@ -101,10 +125,10 @@
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Fee Options</label>
               <div class="col-sm-8">
-                <div class="radio block"><label><input type="radio" checked="checked" name="option"
+                <div data-toggle="tooltip" title="select fees option - Free" data-placement="left"  class="radio block"><label><input type="radio" checked="checked" name="option"
                       formControlName="option" value="free">
                     Free </label></div>
-                <div class="radio block"><label><input type="radio" disabled name="option" formControlName="option"
+                <div class="radio block" data-toggle="tooltip" title="select fees option - Paid" data-placement="left" ><label><input type="radio" disabled name="option" formControlName="option"
                       value="paid">
                     Paid</label></div>
               </div>
@@ -113,9 +137,9 @@
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Admittance Type</label>
               <div class="col-sm-8">
-                <div class="radio block"><label><input type="radio" name="admittype" formControlName="admittype"
+                <div class="radio block"><label><input type="radio" data-toggle="tooltip" title="Single admittance entry" data-placement="bottom" name="admittype" formControlName="admittype"
                       value="single"> Single Entry</label></div>
-                <div class="radio block"><label><input type="radio" name="admittype" formControlName="admittype"
+                <div class="radio block"><label><input type="radio" data-toggle="tooltip" title="Multiple admittance entry" data-placement="bottom" name="admittype" formControlName="admittype"
                       value="multiple"> Multiple Entry</label></div>
               </div>
             </div>

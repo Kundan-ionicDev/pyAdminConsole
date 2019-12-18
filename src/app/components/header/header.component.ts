@@ -8,11 +8,13 @@ declare var $:any;
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  userName: string;
 
   constructor() { }
 
   ngOnInit() {
     $('#side-menu').metisMenu();
+    this.userName = localStorage.getItem("UserName");
   }
 
 }
