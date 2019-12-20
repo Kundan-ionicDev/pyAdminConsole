@@ -4,13 +4,12 @@
       <h3>Create Event</h3>
       <div class="tab-content">
         <div class="tab-pane active">
-          <!-- <form class="form-horizontal"> -->
-          <!-- <input id="locationTextField" type="text" size="50"> -->
           <form role="form" [formGroup]="createeventForm" (ngSubmit)="generateQR()" class="form-horizontal">
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Name *</label>
               <div class="col-sm-8">
-                <input type="text" data-toggle="tooltip" title="Enter Event Name!" data-placement="bottom" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
+                <input type="text" data-toggle="tooltip" title="Enter Event Name!" data-placement="bottom"
+                  class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
                   [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
                 <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
                   <div *ngIf="f.Name.errors.required">Name is required</div>
@@ -22,8 +21,9 @@
             <div class="form-group">
               <label for="disabledinput" class="col-sm-2 control-label">Description</label>
               <div class="col-sm-8">
-                <input type="text" data-toggle="tooltip" title="Enter Event Description!" data-placement="bottom" formControlName="description" class="form-control1" id="disabledinput"
-                  placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                <input type="text" data-toggle="tooltip" title="Enter Event Description!" data-placement="bottom"
+                  formControlName="description" class="form-control1" id="disabledinput" placeholder="Description"
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
                 <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
                   <div *ngIf="f.description.errors.required">Description is required</div>
                   <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
@@ -33,9 +33,46 @@
 
 
             <div class="form-group">
+              <label for="disabledinput" class="col-sm-2 control-label">Start Date</label>
+              <div class="col-sm-8">
+                <input [owlDateTime]="startdt1" [owlDateTimeTrigger]="startdt1" data-toggle="tooltip"
+                  title="Enter Event StartDate!" data-placement="bottom" formControlName="startdate"
+                  class="form-control1" id="disabledinput" placeholder="2019-12-11"
+                  [ngClass]="{ 'is-invalid': submitted && f.startdate.errors }" />
+                <owl-date-time #startdt1></owl-date-time>
+                <!-- <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time"> -->
+
+                <div *ngIf="submitted && f.startdate.errors" class="invalid-feedback">
+                  <div *ngIf="f.startdate.errors.required">startdate is required</div>
+                  <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="disabledinput" class="col-sm-2 control-label">End Date</label>
+              <div class="col-sm-8">
+                <input [owlDateTime]="enddt1" [owlDateTimeTrigger]="enddt1" data-toggle="tooltip" title="Enter EndDate!"
+                  data-placement="bottom" formControlName="endate" class="form-control1" id="disabledinput"
+                  placeholder="2019-12-11" [ngClass]="{ 'is-invalid': submitted && f.endate.errors }" />
+                <owl-date-time #enddt1></owl-date-time>
+
+                <div *ngIf="submitted && f.endate.errors" class="invalid-feedback">
+                  <div *ngIf="f.endate.errors.required">End Date is required</div>
+                  <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Contact Person *</label>
               <div class="col-sm-8">
-                <input type="text" data-toggle="tooltip" title="Enter Contact Person Name!" data-placement="bottom" class="form-control1" formControlName="contactpname" id="focusedinput" placeholder="Enter Contact Person Name!"
+                <input type="text" data-toggle="tooltip" title="Enter Contact Person Name!" data-placement="bottom"
+                  class="form-control1" formControlName="contactpname" id="focusedinput"
+                  placeholder="Enter Contact Person Name!"
                   [ngClass]="{ 'is-invalid': submitted && f.contactpname.errors }" />
                 <div *ngIf="submitted && f.contactpname.errors" class="invalid-feedback">
                   <div *ngIf="f.contactpname.errors.required">Person name is required</div>
@@ -46,7 +83,9 @@
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Contact Number *</label>
               <div class="col-sm-8">
-                <input type="text" data-toggle="tooltip" title="Enter Contact Person Number !" data-placement="bottom" class="form-control1" formControlName="contactpnumber" id="focusedinput" placeholder="Enter Contact Person Number!"
+                <input type="text" data-toggle="tooltip" title="Enter Contact Person Number !" data-placement="bottom"
+                  class="form-control1" formControlName="contactpnumber" id="focusedinput"
+                  placeholder="Enter Contact Person Number!"
                   [ngClass]="{ 'is-invalid': submitted && f.contactpnumber.errors }" />
                 <div *ngIf="submitted && f.contactpnumber.errors" class="invalid-feedback">
                   <div *ngIf="f.contactpnumber.errors.required">Contact Number is required</div>
@@ -59,8 +98,9 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Duration</label>
               <div class="col-sm-8">
-                <input type="text" data-toggle="tooltip" title="Enter Event Duration!" data-placement="bottom" formControlName="duration" class="form-control1" id="inputPassword"
-                  placeholder="Duration" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" />
+                <input type="text" data-toggle="tooltip" title="Enter Event Duration!" data-placement="bottom"
+                  formControlName="duration" class="form-control1" id="inputPassword" placeholder="Duration"
+                  [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" />
                 <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
                   <div *ngIf="f.duration.errors.required">Event Duration is required</div>
                   <!-- <div *ngIf="f.duration.errors.email">Name must be a valid</div> -->
@@ -71,16 +111,11 @@
             <div class="form-group">
               <label for="selector1" class="col-sm-2 control-label">Category</label>
               <div class="col-sm-8">
-                <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom" name="selector1" id="selector1" formControlName="category" class="form-control1">
-                  <option value="default">-- Select a Category --</option>
-                  <option value="Conferences">Conferences.</option>
-                  <option value="Seminars">Seminars</option>
-                  <option value="Meetings">Meetings</option>
-                  <option value="Trade Shows">Trade Shows.</option>
-                  <option value="Press Conferences">Press Conferences</option>
-                  <option value="Product Launches">Product Launches</option>
-                  <option value="Theme Parties">Theme Parties</option>
-                  <option value="Team Building Events">Team Building Events</option>
+                <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom" name="selector1"
+                  id="selector1" formControlName="category" class="form-control1">
+                  <option value="0">Select</option>
+                  <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+               
                 </select>
               </div>
             </div>
@@ -88,8 +123,8 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Address</label>
               <div class="col-sm-8">
-                <textarea data-toggle="tooltip" title="Enter Event Venue!" data-placement="bottom" name="txtarea1" formControlName="address" id="txtarea1" cols="100" rows="20"
-                  class="form-control1"></textarea>
+                <textarea data-toggle="tooltip" title="Enter Event Venue!" data-placement="bottom" name="txtarea1"
+                  formControlName="address" id="txtarea1" cols="100" rows="20" class="form-control1"></textarea>
                 <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                   <div *ngIf="f.address.errors.required">Address is required</div>
                   <!-- <div *ngIf="f.address.errors.email">Name must be a valid</div> -->
@@ -100,8 +135,9 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max Admittance</label>
               <div class="col-sm-8">
-                <input type="number" data-toggle="tooltip" title="Enter Max Admittance!" data-placement="bottom" formControlName="admittance" class="form-control1" id="inputPassword"
-                  placeholder="Max Admittance" [ngClass]="{ 'is-invalid': submitted && f.admittance.errors }">
+                <input type="number" data-toggle="tooltip" title="Enter Max Admittance!" data-placement="bottom"
+                  formControlName="admittance" class="form-control1" id="inputPassword" placeholder="Max Admittance"
+                  [ngClass]="{ 'is-invalid': submitted && f.admittance.errors }">
                 <div *ngIf="submitted && f.admittance.errors" class="invalid-feedback">
                   <div *ngIf="f.admittance.errors.required">Max Admittance is required</div>
                   <!-- <div *ngIf="f.admittance.errors.email">Name must be a valid</div> -->
@@ -113,8 +149,9 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max User Limit</label>
               <div class="col-sm-8">
-                <input type="number" data-toggle="tooltip" title="Enter Max User Limit!" data-placement="bottom" formControlName="userlimit" class="form-control1" id="inputPassword"
-                  placeholder="Max User Limit" [ngClass]="{ 'is-invalid': submitted && f.userlimit.errors }">
+                <input type="number" data-toggle="tooltip" title="Enter Max User Limit!" data-placement="bottom"
+                  formControlName="userlimit" class="form-control1" id="inputPassword" placeholder="Max User Limit"
+                  [ngClass]="{ 'is-invalid': submitted && f.userlimit.errors }">
                 <div *ngIf="submitted && f.userlimit.errors" class="invalid-feedback">
                   <div *ngIf="f.userlimit.errors.required">Max User Limit is required</div>
                 </div>
@@ -125,11 +162,12 @@
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Fee Options</label>
               <div class="col-sm-8">
-                <div data-toggle="tooltip" title="select fees option - Free" data-placement="left"  class="radio block"><label><input type="radio" checked="checked" name="option"
-                      formControlName="option" value="free">
+                <div data-toggle="tooltip" title="select fees option - Free" data-placement="left" class="radio block">
+                  <label><input type="radio" checked="checked" name="feesoption" formControlName="feesoption"
+                      value="free">
                     Free </label></div>
-                <div class="radio block" data-toggle="tooltip" title="select fees option - Paid" data-placement="left" ><label><input type="radio" disabled name="option" formControlName="option"
-                      value="paid">
+                <div class="radio block" data-toggle="tooltip" title="select fees option - Paid" data-placement="left">
+                  <label><input type="radio" disabled name="feesoption" formControlName="feesoption" value="paid">
                     Paid</label></div>
               </div>
             </div>
@@ -137,17 +175,18 @@
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Admittance Type</label>
               <div class="col-sm-8">
-                <div class="radio block"><label><input type="radio" data-toggle="tooltip" title="Single admittance entry" data-placement="bottom" name="admittype" formControlName="admittype"
-                      value="single"> Single Entry</label></div>
-                <div class="radio block"><label><input type="radio" data-toggle="tooltip" title="Multiple admittance entry" data-placement="bottom" name="admittype" formControlName="admittype"
-                      value="multiple"> Multiple Entry</label></div>
+                <div class="radio block"><label><input checked="checked" type="radio" data-toggle="tooltip"
+                      title="Single admittance entry" data-placement="bottom" name="admittype"
+                      formControlName="admittype" value="single"> Single Entry</label></div>
+                <div class="radio block"><label><input disabled type="radio" data-toggle="tooltip"
+                      title="Multiple admittance entry" data-placement="bottom" name="admittype"
+                      formControlName="admittype" value="multiple"> Multiple Entry</label></div>
               </div>
             </div>
 
             <div class="panel-footer">
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
-                  <!-- <button class="btn-success btn" (click)="generateQR()">Submit</button> &nbsp; -->
                   <button class="btn-success btn">Submit</button> &nbsp;
                   <button class="btn-default btn">Cancel</button>&nbsp;
                   <button class="btn-inverse btn">Reset</button>
@@ -158,99 +197,8 @@
           </form>
         </div>
       </div>
-      <!-- <div class="bs-example" > -->
-      <!-- Generate PDF -->
-      <!-- <div #content id="content"> -->
-      <div class="container" *ngIf="display" #content id="content" style="background-color: #ffff;">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title"><strong>Event Details</strong></h3>
-              </div>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed">
-                    <tr>
-                      <td>
-                        <b>Event Name :</b>
-                      </td>
-                      <td>
-                        Arjit
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <b>Event Description :</b>
-                      </td>
-                      <td>
-                        Arijit Singh Live in Mumbai | One Night Only 2020 | Sign up for Early Access
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <b>Event Venue :</b>
-                      </td>
-                      <td>
-                        Jio Garden, BKC, Mumbai,Pt No: RG1A, G Block, Bandra Kurla Complex, Bandra East, Mumbai,
-                        Maharashtra
-                        400051
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <b>Start:</b>
-                      </td>
-                      <td>
-                        January 25 | 7PM
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><b>Price: </b></td>
-                      <td>Rs. 1200/-</td>
-                    </tr>
-                    <tr>
-                      <td><b>Categories:</b></td>
-                      <td>Music</td>
-                    </tr>
-                    <tr>
-                      <td><b>Tags:</b></td>
-                      <td>bollywood, music, concert</td>
-                    </tr>
-                    <tr>
-                      <td>
-
-                      </td>
-                      <td>
-                        <ngx-qrcode *ngIf="display" [qrc-element-type]="elementType" [qrc-value]="value">
-                        </ngx-qrcode><br>
-                      </td>
-                    </tr>
-                  </table>
-                  <p>
-                    <a hred="https://pyquantum.com/">https://pyquantum.com/</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <a *ngIf="display" (click)="makePdf()" download>Download and Print Event Details</a>
-        </div>
-      </div>
-
-
     </div>
   </div>
-  <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrLsZkUS1QwwcfCkUA3x3KqKHDYrP8kBc&libraries=places"></script>
-  <script>
-      function init() {
-          var input = document.getElementById('locationTextField');
-          var autocomplete = new google.maps.places.Autocomplete(input);
-      }
 
-      google.maps.event.addDomListener(window, 'load', init);
-  </script> -->
+  
+</div>

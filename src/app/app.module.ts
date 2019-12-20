@@ -21,6 +21,7 @@ import { CouponcreateComponent } from './pages/couponcreate/couponcreate.compone
 import { LotteryOneComponent } from './pages/lottery-one/lottery-one.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

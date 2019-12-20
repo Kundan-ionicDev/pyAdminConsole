@@ -33,7 +33,7 @@ export class EventsapiService {
 
   // Calling GET Method's
   _getAPI(methodname:string): Observable<any> {
-    return this.http.get<any>('',this.httpOptions).pipe(
+    return this.http.get<any>(this.apiURL+methodname,this.httpOptions).pipe(
       tap(_ => this.log(methodname)),
       catchError(this.handleError('login', []))
     );

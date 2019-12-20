@@ -28,6 +28,7 @@
     "jquery": "^3.4.1",
     "jspdf": "^1.5.3",
     "metismenu": "^3.0.4",
+    "ng-pick-datetime": "^7.0.0",
     "ngx-qrcode2": "0.0.9",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

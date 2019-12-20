@@ -7,6 +7,17 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
+
+export const DateTimeValidator = (fc: FormControl) => {
+  const date = new Date(fc.value);
+  const isValid = !isNaN(date.valueOf());
+  return isValid ? null : {
+      isValid: {
+          valid: false
+      }
+  };
+};
+
 export class NgxQrCode {
   text: string;
 }
@@ -16,6 +27,7 @@ export class NgxQrCode {
   templateUrl: './createvent.component.html',
   styleUrls: ['./createvent.component.css']
 })
+
 export class CreateventComponent implements OnInit {
   qrcodename: string = "http://pyticketingsystem.com/events/id=";
   title = 'generate-qrcode';
@@ -26,12 +38,14 @@ export class CreateventComponent implements OnInit {
   public qrdata: string = null;
   createeventForm: FormGroup;
   submitted: boolean;
+  categories: any;
 
   constructor(
     private matDialog: MatDialog,
     private formBuilder: FormBuilder,
     public api: EventsapiService
   ) {
+    this.initiallize();
     this.myAngularxQrCode = this.qrcodename;
   }
 
@@ -41,59 +55,79 @@ export class CreateventComponent implements OnInit {
     this.createeventForm = this.formBuilder.group({
       Name: new FormControl('COA', Validators.required),
       description: new FormControl('Center Stage Award',Validators.required),
-      duration: new FormControl('2 hours',Validators.required),
-      category: new FormControl('Seminars',Validators.required),
+      startdate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
+      endate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
+      contactpname : new FormControl('Kundan Sakpal',Validators.required),
+      contactpnumber : new FormControl('9960097184',Validators.required),
+      duration: new FormControl('2',Validators.required),
+      category: new FormControl('1',Validators.required),
       address: new FormControl('BKC bandra Mumbai 400061',Validators.required),
       admittance: new FormControl('200',Validators.required),
       userlimit: new FormControl('2',Validators.required),
-      option : new FormControl('free',Validators.required),
-      admittype : new FormControl('2',Validators.required),
-      contactpnumber : new FormControl('9960097184',Validators.required),
-      contactpname : new FormControl('Kundan Sakpal',Validators.required),
+      feesoption : new FormControl('free',Validators.required),
+      admittype : new FormControl('',Validators.required)
     });
+    
+  }
 
+
+  initiallize(){
+    // alert('initialize');
+    this.api._getAPI('master/category/list').pipe(
+      catchError(err => {
+          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
+          return throwError(err);
+      })
+    )
+    .subscribe(
+        res  => {
+          // alert('HTTP response'+ JSON.stringify(res));
+          this.categories = res.data;
+        },
+        err => {
+          if(err.length >0){
+            // alert('HTTP Error'+ err)
+          }
+        }
+    );
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.createeventForm.controls; }
 
   generateQR(){
-    // const dialogConfig = new MatDialogConfig();
-    // this.matDialog.open(EventDialog, dialogConfig);
-
-    const dialogRef = this.matDialog.open(EventDialog, {
-      // data: [{ "Name":"kundan"}],
-      width: '800px',
-      hasBackdrop: true,
-      autoFocus : false
-    });
-   
-   
-    dialogRef.afterClosed().subscribe(result => {
-      this.value = result;
-      // alert('Updated Track Value::' + result + JSON.stringify(details));
-      // this._updataTrackDetails(details);
-    });
-
+    console.log('FormValue' , JSON.stringify(this.createeventForm.value));
     
     if(this.createeventForm.valid){
       console.log('form::', this.createeventForm);
-      let params = {
-        "Name": this.createeventForm.value.Name,
-        "Description": this.createeventForm.value.description,
-        "Category": this.createeventForm.value.category,
-        "Duration": this.createeventForm.value.duration,
-        "Location": this.createeventForm.value.address,
-        "Address":this.createeventForm.value.address,
-        "ContactDetails":'Team India',
-        "MaxAdmittance": this.createeventForm.value.admittance,
-        "MaxUserLimit":this.createeventForm.value.userlimit,
-        "TicketIssuance":"Individual",
-        "FeeOptions": this.createeventForm.value.option,
-        "AdmittanceType": this.createeventForm.value.admittype
+      let params =  {
+        "title": this.createeventForm.value.Name,
+        "eventDescription": this.createeventForm.value.description,
+        "startDate": this.createeventForm.value.startdate,
+        "endDate": this.createeventForm.value.endate,
+        "contactPersonName": this.createeventForm.value.contactpname,
+        "contactPerson": this.createeventForm.value.contactpnumber,
+        "duration": this.createeventForm.value.duration,
+        "eventCategoryId": this.createeventForm.value.category,
+        "address": this.createeventForm.value.address,
+        "latitude": "34.23234242",
+        "longitude": "34.23234242",
+        "maxSeat": this.createeventForm.value.admittance,
+        "minSeat": this.createeventForm.value.userlimit,
+        "isPaid": false, //this.createeventForm.value.feesoption,
+        // "AdmittanceType": this.createeventForm.value.admittype,
+        "isSeatsVisible": false,
+        "perSeatCharge": 0,
+        // "eventTypeId": 1,
+        // "cityId": 1,
+        // "stateId": 1,
+        // "countryId": 1,
+        // "salesStartDate": this.createeventForm.value.startdate,
+        // "salesEndDate" : this.createeventForm.value.endate
       };
-  
-      this.api._postAPI('registerEvent',params).pipe(
+
+      console.log('form::', this.createeventForm);
+      this.api._postAPI('event/add',params).pipe(
         catchError(err => {
             // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
             return throwError(err);
@@ -101,7 +135,7 @@ export class CreateventComponent implements OnInit {
       )
       .subscribe(
           res  => {
-            // alert('HTTP response'+ JSON.stringify(res) + res._id)
+            alert('HTTP response'+ JSON.stringify(res))
             //  $("#content").show();
             if (this.qrcodename == '') {
               this.display = false;
@@ -110,8 +144,35 @@ export class CreateventComponent implements OnInit {
             } else {
               this.value = this.qrcodename + res._id;
               this.display = true;
+              const dialogRef = this.matDialog.open(EventDialog, {
+                data: 
+                {
+                  "title": this.createeventForm.value.Name,
+                  "eventDescription": this.createeventForm.value.description,
+                  "startDate": this.createeventForm.value.startdate,
+                  "endDate": this.createeventForm.value.endate,
+                  "contactPersonName": this.createeventForm.value.contactpname,
+                  "contactPerson": this.createeventForm.value.contactpnumber,
+                  "duration": this.createeventForm.value.duration,
+                  "eventCategoryId": this.createeventForm.value.category,
+                  "address": this.createeventForm.value.address,
+                  "maxSeat": this.createeventForm.value.admittance,
+                  "minSeat": this.createeventForm.value.userlimit,
+                  "isPaid": false, 
+                  "isSeatsVisible": false,
+                  "perSeatCharge": 0,
+                  "QrValue": this.value
+                },
+                width: '800px',
+                hasBackdrop: true,
+                autoFocus : false
+              });
+             
+             
+              dialogRef.afterClosed().subscribe(result => {
+                this.value = result;
+              });
             }
-            this.makePdf();
           },
           err => {
             if(err.length >0){
@@ -125,24 +186,25 @@ export class CreateventComponent implements OnInit {
   }
 
   
-  makePdf() {
-    var DocumentContainer = document.getElementById('content');
-    var html = '<html><head>'+
-               '<link href="css/template.css" rel="stylesheet" type="text/css" />'+
-               '</head><body style="background:#ffffff;">'+
-               DocumentContainer.innerHTML+
-               '</body></html>';
+//   makePdf() {
+//     var DocumentContainer = document.getElementById('content');
+//     var html = '<html><head>'+
+//                '<link href="css/template.css" rel="stylesheet" type="text/css" />'+
+//                '</head><body style="background:#ffffff;">'+
+//                DocumentContainer.innerHTML+
+//                '</body></html>';
 
-    var WindowObject = window.open("", "PrintWindow",
-    "width=auto,height=auto,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes, _blank");
-    WindowObject.document.writeln(DocumentContainer.innerHTML);
-    WindowObject.document.close();
-    WindowObject.focus();
-    WindowObject.print();
-    WindowObject.close();
+//     var WindowObject = window.open("", "PrintWindow",
+//     "width=auto,height=auto,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes, _blank");
+//     WindowObject.document.writeln(DocumentContainer.innerHTML);
+//     WindowObject.document.close();
+//     WindowObject.focus();
+//     WindowObject.print();
+//     WindowObject.close();
     
-    document.getElementById('print_link').style.display='block';
-  }
+//     document.getElementById('print_link').style.display='block';
+//   }
+
 }
 
 @Component({
@@ -157,7 +219,8 @@ export class EventDialog {
     public dialogRef: MatDialogRef<EventDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.value = this.qrcodename;
-              this.display = true;
+      this.display = true;
+      console.log('Data' , data);      
     }
 
 
