@@ -22,6 +22,7 @@ import { LotteryOneComponent } from './pages/lottery-one/lottery-one.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     ApplicationadminComponent,
     CouponcreateComponent,
     LotteryOneComponent,
-    EventDialog
+    EventDialog,
+    LotteryrulesComponent
   ],
 
   entryComponents: [

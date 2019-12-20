@@ -5,7 +5,7 @@
 
 <div class="row p-t-20">
   <div class="col-md-6">
-    <h3 class="panel-title"><strong>Download and Print Event Details</strong></h3>
+    <h3 class="panel-title"><strong>Print Event Details</strong></h3>
   </div>
   <div class="col-md-6 text-right">
     <button (click)="makePdf()" class="btn-success btn">Print
@@ -33,7 +33,7 @@
                     <b>Event Name :</b>
                   </td>
                   <td>
-                    {{ data.EventTitile }}
+                    {{ data.title }}
                   </td>
                 </tr>
 
@@ -42,7 +42,7 @@
                     <b>Event Description :</b>
                   </td>
                   <td>
-                    {{ data.EventDescription }}
+                    {{ data.eventDescription }}
                   </td>
                 </tr>
 
@@ -51,7 +51,7 @@
                     <b>Event Venue :</b>
                   </td>
                   <td style="word-wrap:break-word;">
-                    {{ data.Address }}
+                    {{ data.address }}
                   </td>
                 </tr>
                 <tr>
@@ -59,36 +59,33 @@
                     <b>Start Date:</b>
                   </td>
                   <td>
-                    {{ data.StartDate }}
+                    {{ data.startDate | date:'EEEE, MMMM d, y h:mm a ' }}
                   </td>
                 </tr>
                 <tr>
                   <td><b>End Date: </b></td>
                   <td>
-                    {{ data.EndDate}}
+                    {{ data.endDate  | date:'EEEE, MMMM d, y h:mm a ' }}
                   </td>
                 </tr>
                 <tr>
-                  <td><b>Categories:</b></td>
-                  <td>{{ data.EventCategory }}</td>
+                  <td><b>Contact Person Name:</b></td>
+                  <td>{{ data.contactPersonName }}</td>
                 </tr>
-                <!-- <tr>
-                  <td><b>Tags:</b></td>
-                  <td>bollywood, music, concert</td>
-                </tr> -->
+                <tr>
+                  <td><b>Contact Person Number:</b></td>
+                  <td> {{ data.contactPerson }}</td>
+                </tr>
                 <tr>
                   <td>
 
                   </td>
                   <td>
-                    <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="value">
+                    <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="data.QrValue">
                     </ngx-qrcode><br>
                   </td>
                 </tr>
               </table>
-              <!-- <p>
-                    <a hred="https://pyquantum.com/">https://pyquantum.com/</a>
-                  </p> -->
               <div class="container-fluid">
                 <div class="row-fluid">
 
@@ -115,8 +112,6 @@
 
                   <footer>
                     <hr>
-
-                    <!-- Purchase a site license to remove this link from the footer: http://www.portnine.com/bootstrap-themes -->
                     <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free
                         Event Ticket</a> by <a href="http://www.pyquantum.com" target="_blank">pyQuantum</a></p>
 

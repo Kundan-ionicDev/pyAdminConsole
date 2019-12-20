@@ -29,7 +29,7 @@ export class NgxQrCode {
 })
 
 export class CreateventComponent implements OnInit {
-  qrcodename: string = "http://pyticketingsystem.com/events/id=";
+  qrcodename: string = "http://pyticketingsystem.com/events/";
   title = 'generate-qrcode';
   elementType: 'img';
   value: string;
@@ -96,10 +96,10 @@ export class CreateventComponent implements OnInit {
   get f() { return this.createeventForm.controls; }
 
   generateQR(){
-    console.log('FormValue' , JSON.stringify(this.createeventForm.value));
+   // console.log('FormValue' , JSON.stringify(this.createeventForm.value));
     
     if(this.createeventForm.valid){
-      console.log('form::', this.createeventForm);
+     // console.log('form::', this.createeventForm);
       let params =  {
         "title": this.createeventForm.value.Name,
         "eventDescription": this.createeventForm.value.description,
@@ -126,7 +126,7 @@ export class CreateventComponent implements OnInit {
         // "salesEndDate" : this.createeventForm.value.endate
       };
 
-      console.log('form::', this.createeventForm);
+      //console.log('form::', this.createeventForm);
       this.api._postAPI('event/add',params).pipe(
         catchError(err => {
             // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
@@ -135,30 +135,31 @@ export class CreateventComponent implements OnInit {
       )
       .subscribe(
           res  => {
-            alert('HTTP response'+ JSON.stringify(res))
+            //alert('HTTP response'+ JSON.stringify(res))
             //  $("#content").show();
             if (this.qrcodename == '') {
               this.display = false;
               // alert("Please enter the name");
               return;
             } else {
-              this.value = this.qrcodename + res._id;
+              this.value = this.qrcodename + res.data.objectId + '/'+ res.data.title;
+              //alert('res.data.objectId' + res.data.objectId);
               this.display = true;
               const dialogRef = this.matDialog.open(EventDialog, {
                 data: 
                 {
-                  "title": this.createeventForm.value.Name,
-                  "eventDescription": this.createeventForm.value.description,
-                  "startDate": this.createeventForm.value.startdate,
-                  "endDate": this.createeventForm.value.endate,
-                  "contactPersonName": this.createeventForm.value.contactpname,
-                  "contactPerson": this.createeventForm.value.contactpnumber,
-                  "duration": this.createeventForm.value.duration,
-                  "eventCategoryId": this.createeventForm.value.category,
-                  "address": this.createeventForm.value.address,
-                  "maxSeat": this.createeventForm.value.admittance,
-                  "minSeat": this.createeventForm.value.userlimit,
-                  "isPaid": false, 
+                  "title": res.data.title,
+                  "eventDescription": res.data.eventDescription,
+                  "startDate": res.data.startDate,
+                  "endDate": res.data.endDate,
+                  "contactPersonName": res.data.contactPersonName,
+                  "contactPerson": res.data.contactPerson,
+                  "duration": res.data.duration,
+                  "eventCategoryId": res.data.category,
+                  "address": res.data.address,
+                  "maxSeat": res.data.maxSeat,
+                  "minSeat": res.data.minSeat,
+                  "isPaid": 'Free', 
                   "isSeatsVisible": false,
                   "perSeatCharge": 0,
                   "QrValue": this.value
@@ -172,6 +173,8 @@ export class CreateventComponent implements OnInit {
               dialogRef.afterClosed().subscribe(result => {
                 this.value = result;
               });
+
+              this.createeventForm.reset();
             }
           },
           err => {

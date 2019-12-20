@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-
+import { EventsapiService } from 'src/app/services/eventsapi.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+declare var $: any;
 @Component({
   selector: 'app-couponcreate',
   templateUrl: './couponcreate.component.html',
@@ -12,10 +15,14 @@ export class CouponcreateComponent implements OnInit {
   couponForm: any;
   display = false;
   submitted: boolean;
+  eventList: any;
+  categories: any;
 
   constructor(
-    private formBuilder: FormBuilder,
+    public api: EventsapiService,
+    private formBuilder: FormBuilder
   ) {
+    this.initialize();
     this.couponForm = this.formBuilder.group({
       Name: new FormControl('', Validators.required),
       description: new FormControl('',Validators.required),
@@ -31,6 +38,7 @@ export class CouponcreateComponent implements OnInit {
    }
 
   ngOnInit() {
+    $('[data-toggle="tooltip"]').tooltip();   
   }
 
   // convenience getter for easy access to form fields
@@ -44,5 +52,66 @@ export class CouponcreateComponent implements OnInit {
       this.showHide = false;
       this.buttontext = "Add";
     }
+  }
+
+  initialize(){
+    
+    this.api._getAPI('event/list').pipe(
+      catchError(err => {
+          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
+          return throwError(err);
+      })
+    )
+    .subscribe(
+        res  => {
+          // alert('HTTP response'+ JSON.stringify(res));
+          this.eventList = res.data;
+        },
+        err => {
+          if(err.length >0){
+            //alert('HTTP Error'+ err)
+          }
+        }
+    );
+
+
+
+    this.api._getAPI('event/list').pipe(
+      catchError(err => {
+          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
+          return throwError(err);
+      })
+    )
+    .subscribe(
+        res  => {
+          // alert('HTTP response'+ JSON.stringify(res));
+          this.eventList = res.data;
+        },
+        err => {
+          if(err.length >0){
+            //alert('HTTP Error'+ err)
+          }
+        }
+    );
+
+
+    // alert('initialize');
+    this.api._getAPI('master/category/list').pipe(
+      catchError(err => {
+          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
+          return throwError(err);
+      })
+    )
+    .subscribe(
+        res  => {
+          // alert('HTTP response'+ JSON.stringify(res));
+          this.categories = res.data;
+        },
+        err => {
+          if(err.length >0){
+            // alert('HTTP Error'+ err)
+          }
+        }
+    );
   }
 }

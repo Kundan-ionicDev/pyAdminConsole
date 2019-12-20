@@ -2,13 +2,61 @@
   <div class="graphs">
     <div class="xs">
       <h3>Coupon Entry/ Manage</h3>
-      <button (click)="add()" *ngIf="showHide == false" class="btn-success btn">
-        Add
-      </button>
 
-      <button (click)="add()" *ngIf="showHide == true" class="btn-success btn">
-        Show Coupon list
-      </button>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="main-box clearfix">
+            <div class="table-responsive">
+              <table class="table user-list">
+                <thead>
+                  <tr>
+                    <th><span>Add/Show</span></th>
+                    <th *ngIf="showHide == false"><span>Category</span></th>
+                    <th *ngIf="showHide == false"><span>Event(s)</span></th>
+                    <th *ngIf="showHide == false"><span>&nbsp;</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <button (click)="add()" *ngIf="showHide == false" class="btn-success btn">
+                        Add
+                      </button>
+
+                      <button (click)="add()" *ngIf="showHide == true" class="btn-success btn">
+                        Show Coupon list
+                      </button>
+                    </td>
+                    <td  *ngIf="showHide == false" class="text-center">
+                      <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
+                        name="selector1" class="form-control1">
+                        <option value="0">Select</option>
+                        <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+
+                      </select>
+                    </td>
+                    <td *ngIf="showHide == false">
+                      <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
+                        name="selector1" class="form-control1">
+                        <option value="0">Select</option>
+                        <option *ngFor="let cat of eventList" [value]="cat.id">{{cat.title}}</option>
+
+                      </select>
+                    </td>
+                    <td *ngIf="showHide == false">
+                      <button class="btn-success btn">
+                        Search
+                      </button>&nbsp;
+                      <button (click)="makePdf()" class="btn-success btn">Print
+                        <span class="glyphicon glyphicon-print"></span>
+                      </button> &nbsp;
+                    </td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="container" *ngIf="showHide == false">
         <div class="row">
@@ -125,7 +173,7 @@
           <!-- <input id="locationTextField" type="text" size="50"> -->
           <form role="form" [formGroup]="couponForm" (ngSubmit)="add()" class="form-horizontal">
             <div class="form-group">
-              <label for="focusedinput" class="col-sm-2 control-label">Coupon Code *</label>
+              <label for="focusedinput" class="col-sm-2 control-label">Coupon Code </label>
               <div class="col-sm-8">
                 <input type="text" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
                   [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
@@ -153,7 +201,7 @@
             <div class="form-group">
               <label for="selector1" class="col-sm-2 control-label">Event For</label>
               <div class="col-sm-8">
-                <select name="selector1" id="selector1" formControlName="category" class="form-control1">
+                <!-- <select name="selector1" id="selector1" formControlName="category" class="form-control1">
                   <option value="default">-- Select Event --</option>
                   <option>Conferences.</option>
                   <option>Seminars</option>
@@ -163,21 +211,27 @@
                   <option>Product Launches</option>
                   <option>Theme Parties</option>
                   <option>Team Building Events</option>a
+                </select> -->
+                <select name="selector1" id="selector1" formControlName="category" class="form-control1">
+                  <option value="0">Select</option>
+                  <option *ngFor="let events of eventList" [value]="events.eventId">{{ events.title }}</option>
                 </select>
               </div>
             </div>
 
             <div class="form-group">
+              <label for="inputPassword" class="col-sm-2 control-label">Quantity</label>
+              <div class="col-sm-8" data-toggle="tooltip" title="Enter Coupon Quantity!" data-placement="bottom">
+                <input type="number" class="form-control1" />
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Expire Date</label>
-              <div class="col-sm-8">
-                <!-- <textarea name="txtarea1" formControlName="address" id="txtarea1" cols="100" rows="20"
-                  class="form-control1"></textarea> -->
-                <input type="date" formControlName="expiredt"
-                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
-                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                  <div *ngIf="f.address.errors.required">Address is required</div>
-                  <!-- <div *ngIf="f.address.errors.email">Name must be a valid</div> -->
-                </div>
+              <div class="col-sm-8" data-toggle="tooltip" title="Select Expiry Date!" data-placement="bottom">
+                <input [owlDateTime]="enddt1" [owlDateTimeTrigger]="enddt1" formControlName="expiredt"
+                  class="form-control1" />
+                <owl-date-time #enddt1></owl-date-time>
               </div>
             </div>
 

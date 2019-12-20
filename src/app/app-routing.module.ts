@@ -10,6 +10,7 @@ import { ViewusersComponent } from './pages/viewusers/viewusers.component';
 import { ApplicationadminComponent } from './pages/applicationadmin/applicationadmin.component';
 import { CouponcreateComponent } from './pages/couponcreate/couponcreate.component';
 import { LotteryOneComponent } from './pages/lottery-one/lottery-one.component';
+import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
     { path: 'viewusers', component: ViewusersComponent },
     { path: 'appliadmin', component: ApplicationadminComponent },
     { path: 'couponcreate', component: CouponcreateComponent },
-    { path: 'lottery', component: LotteryOneComponent }
+    { path: 'lottery', component: LotteryOneComponent },
+    { path: 'lotteryrule', component: LotteryrulesComponent }
   ] },
 ];
 

@@ -7,14 +7,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">PY Ticketing</a>
+      <a class="navbar-brand" href="">PY Ticketing</a>
     </div>
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="../../../assets/images/1.png"
-            alt="{{userName}}" />
+        <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
           Welcome, <b> {{ userName }}</b>
           <span class="badge"></span></a>
       </li>
@@ -45,6 +44,9 @@
                 <a [routerLink]="['createevent']">Create Event</a>
               </li>
               <li>
+                <a [routerLink]="['viewevents']">View Event</a>
+              </li>
+              <li>
                 <a [routerLink]="['pagenotfound']">Publish Notification</a>
               </li>
               <li>
@@ -60,10 +62,10 @@
                 <a [routerLink]="['couponcreate']">Create Coupon</a>
               </li>
               <li>
-                <a [routerLink]="['pagenotfound']">Coupon Rules</a>
+                <a [routerLink]="['lotteryrule']">Create Lottery</a>
               </li>
               <li>
-                <a [routerLink]="['lottery']">Generate Lottery</a>
+                <a [routerLink]="['lottery']">History</a>
               </li>
             </ul>
             <!-- /.nav-second-level -->
