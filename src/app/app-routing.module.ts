@@ -11,6 +11,7 @@ import { ApplicationadminComponent } from './pages/applicationadmin/applicationa
 import { CouponcreateComponent } from './pages/couponcreate/couponcreate.component';
 import { LotteryOneComponent } from './pages/lottery-one/lottery-one.component';
 import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.component';
+import { LotteryhistoryComponent } from './pages/lotteryhistory/lotteryhistory.component';
 
 
 const routes: Routes = [
@@ -26,8 +27,9 @@ const routes: Routes = [
     { path: 'viewusers', component: ViewusersComponent },
     { path: 'appliadmin', component: ApplicationadminComponent },
     { path: 'couponcreate', component: CouponcreateComponent },
-    { path: 'lottery', component: LotteryOneComponent },
-    { path: 'lotteryrule', component: LotteryrulesComponent }
+    { path: 'generatelottery', component: LotteryOneComponent },
+    { path: 'lotteryrule', component: LotteryrulesComponent },
+    { path: 'lotteryhistory', component: LotteryhistoryComponent }
   ] },
 ];
 

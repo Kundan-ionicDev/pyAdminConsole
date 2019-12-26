@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.component';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { LotteryhistoryComponent } from './pages/lotteryhistory/lotteryhistory.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.compone
     CouponcreateComponent,
     LotteryOneComponent,
     EventDialog,
-    LotteryrulesComponent
+    LotteryrulesComponent,
+    LotteryhistoryComponent
   ],
 
   entryComponents: [
@@ -58,7 +61,8 @@ import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.compone
     BrowserAnimationsModule,
     MatDialogModule,
     OwlDateTimeModule, 
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    GooglePlaceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 declare var $: any;
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
+// import { Address } from 'cluster';
 
 
 
@@ -39,7 +42,8 @@ export class CreateventComponent implements OnInit {
   createeventForm: FormGroup;
   submitted: boolean;
   categories: any;
-
+  @ViewChild("placesRef",{ static : true }) placesRef : GooglePlaceDirective;
+  
   constructor(
     private matDialog: MatDialog,
     private formBuilder: FormBuilder,
@@ -61,7 +65,7 @@ export class CreateventComponent implements OnInit {
       contactpnumber : new FormControl('9960097184',Validators.required),
       duration: new FormControl('2',Validators.required),
       category: new FormControl('1',Validators.required),
-      address: new FormControl('BKC bandra Mumbai 400061',Validators.required),
+      address: new FormControl('',Validators.required),
       admittance: new FormControl('200',Validators.required),
       userlimit: new FormControl('2',Validators.required),
       feesoption : new FormControl('free',Validators.required),
@@ -70,6 +74,9 @@ export class CreateventComponent implements OnInit {
     
   }
 
+  handleAddressChange(address: Address) {
+    alert('address' + JSON.stringify(address));
+  }
 
   initiallize(){
     // alert('initialize');
@@ -216,6 +223,8 @@ export class CreateventComponent implements OnInit {
 })
 export class EventDialog {
   value: any;
+  elementType: 'img';
+
   display: boolean;
   qrcodename: string = "http://pyticketingsystem.com/events/id=";
   constructor(

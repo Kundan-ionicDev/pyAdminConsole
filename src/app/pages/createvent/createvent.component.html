@@ -2,6 +2,8 @@
   <div class="graphs">
     <div class="xs">
       <h3>Create Event</h3>
+     
+
       <div class="tab-content">
         <div class="tab-pane active">
           <form role="form" [formGroup]="createeventForm" (ngSubmit)="generateQR()" class="form-horizontal">
@@ -123,8 +125,11 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Address</label>
               <div class="col-sm-8">
-                <textarea data-toggle="tooltip" title="Enter Event Venue!" data-placement="bottom" name="txtarea1"
-                  formControlName="address" id="txtarea1" cols="100" rows="20" class="form-control1"></textarea>
+                <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" 
+                data-toggle="tooltip" title="Enter Event Venue!" data-placement="bottom" 
+                  formControlName="address" class="form-control1"/>
+
+                  <!-- <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
                 <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                   <div *ngIf="f.address.errors.required">Address is required</div>
                   <!-- <div *ngIf="f.address.errors.email">Name must be a valid</div> -->
@@ -199,6 +204,7 @@
       </div>
     </div>
   </div>
-
-  
 </div>
+
+
+

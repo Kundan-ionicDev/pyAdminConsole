@@ -114,4 +114,23 @@ export class CouponcreateComponent implements OnInit {
         }
     );
   }
+
+  makePdf() {
+    var DocumentContainer = document.getElementById('content');
+    var html = '<html><head>'+
+               '<link href="css/template.css" rel="stylesheet" type="text/css" />'+
+               '</head><body style="background:#ffffff;">'+
+               DocumentContainer.innerHTML+
+               '</body></html>';
+
+    var WindowObject = window.open("", "PrintWindow",
+    "width=auto,height=auto,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes, _blank");
+    WindowObject.document.writeln(DocumentContainer.innerHTML);
+    WindowObject.document.close();
+    WindowObject.focus();
+    WindowObject.print();
+    WindowObject.close();
+    
+    document.getElementById('print_link').style.display='block';
+  }
 }

@@ -36,6 +36,7 @@ export class UserAuthComponent implements OnInit {
 
   login(){
     this.submitted = true;
+    this.route.navigateByUrl('main');
     if(this.userAuth.valid){
       // this.route.navigateByUrl('main');
       let params = {
