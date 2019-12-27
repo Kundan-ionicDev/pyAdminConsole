@@ -103,10 +103,7 @@ export class CreateventComponent implements OnInit {
   get f() { return this.createeventForm.controls; }
 
   generateQR(){
-   // console.log('FormValue' , JSON.stringify(this.createeventForm.value));
-    
     if(this.createeventForm.valid){
-     // console.log('form::', this.createeventForm);
       let params =  {
         "title": this.createeventForm.value.Name,
         "eventDescription": this.createeventForm.value.description,
@@ -121,16 +118,9 @@ export class CreateventComponent implements OnInit {
         "longitude": "34.23234242",
         "maxSeat": this.createeventForm.value.admittance,
         "minSeat": this.createeventForm.value.userlimit,
-        "isPaid": false, //this.createeventForm.value.feesoption,
-        // "AdmittanceType": this.createeventForm.value.admittype,
+        "isPaid": false, 
         "isSeatsVisible": false,
-        "perSeatCharge": 0,
-        // "eventTypeId": 1,
-        // "cityId": 1,
-        // "stateId": 1,
-        // "countryId": 1,
-        // "salesStartDate": this.createeventForm.value.startdate,
-        // "salesEndDate" : this.createeventForm.value.endate
+        "perSeatCharge": 0
       };
 
       //console.log('form::', this.createeventForm);
