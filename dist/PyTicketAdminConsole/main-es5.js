@@ -954,6 +954,7 @@
             /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
             /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
             /* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
+            /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
             // import { Address } from 'cluster';
             var DateTimeValidator = function (fc) {
                 var date = new Date(fc.value);
@@ -974,7 +975,7 @@
                     this.matDialog = matDialog;
                     this.formBuilder = formBuilder;
                     this.api = api;
-                    this.qrcodename = "http://pyticketingsystem.com/events/";
+                    this.qrcodename = src_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].website;
                     this.title = 'generate-qrcode';
                     this.display = false;
                     this.myAngularxQrCode = this.qrcodename;
@@ -1006,13 +1007,13 @@
                 };
                 CreateventComponent.prototype.initiallize = function () {
                     var _this = this;
-                    // alert('initialize');
+                    alert('initialize');
                     this.api._getAPI('master/category/list').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) {
                         // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
                         return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(err);
                     }))
                         .subscribe(function (res) {
-                        // alert('HTTP response'+ JSON.stringify(res));
+                        alert('HTTP response' + JSON.stringify(res));
                         _this.categories = res.data;
                     }, function (err) {
                         if (err.length > 0) {
@@ -1062,6 +1063,7 @@
                             }
                             else {
                                 _this.value = _this.qrcodename + res.data.objectId + '/' + res.data.title;
+                                alert('this.value' + _this.value);
                                 //alert('res.data.objectId' + res.data.objectId);
                                 _this.display = true;
                                 var dialogRef = _this.matDialog.open(EventDialog, {
@@ -1093,12 +1095,12 @@
                             }
                         }, function (err) {
                             if (err.length > 0) {
-                                //alert('HTTP Error'+ err)
+                                alert('Error' + err);
                             }
                         });
                     }
                     else {
-                        // alert('Please fill details...');
+                        alert('Please fill details...');
                     }
                 };
                 return CreateventComponent;
@@ -1119,13 +1121,13 @@
                 })
             ], CreateventComponent);
             var EventDialog = /** @class */ (function () {
+                // qrcodename: string = "http://pyticketingsystem.com/events/id=";
                 function EventDialog(dialogRef, data) {
                     this.dialogRef = dialogRef;
                     this.data = data;
-                    this.qrcodename = "http://pyticketingsystem.com/events/id=";
-                    this.value = this.qrcodename;
+                    // this.value = this.qrcodename;
                     this.display = true;
-                    console.log('Data', data);
+                    // console.log('Data' , data);      
                 }
                 EventDialog.prototype.onNoClick = function () {
                     this.dialogRef.close();
@@ -1745,10 +1747,11 @@
             /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
             /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
             /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+            /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
             var EventsapiService = /** @class */ (function () {
                 function EventsapiService(http) {
                     this.http = http;
-                    this.apiURL = "http://localhost:8000/api/";
+                    // apiURL:string ="http://localhost:8000/api/";
                     this.httpOptions = {
                         headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                             'Content-Type': 'application/json',
@@ -1758,12 +1761,12 @@
                 // Calling POST Method's 
                 EventsapiService.prototype._postAPI = function (methodname, params) {
                     var _this = this;
-                    return this.http.post(this.apiURL + methodname, params, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log(methodname); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError(methodname, [])));
+                    return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + methodname, params, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log(methodname); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError(methodname, [])));
                 };
                 // Calling GET Method's
                 EventsapiService.prototype._getAPI = function (methodname) {
                     var _this = this;
-                    return this.http.get(this.apiURL + methodname, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log(methodname); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('login', [])));
+                    return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + methodname, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log(methodname); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('login', [])));
                 };
                 // Error Handling
                 EventsapiService.prototype.handleError = function (operation, result) {
@@ -1806,7 +1809,9 @@
             // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
             // The list of file replacements can be found in `angular.json`.
             var environment = {
-                production: false
+                production: false,
+                apiUrl: "http://ramdeshdev.com/api/",
+                website: "http://ramdeshdev.com/events/"
             };
             /*
              * For easier debugging in development mode, you can import the following file

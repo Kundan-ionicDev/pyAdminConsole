@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import { environment } from 'src/environments/environment';
 // import { Address } from 'cluster';
 
 
@@ -32,7 +33,7 @@ export class NgxQrCode {
 })
 
 export class CreateventComponent implements OnInit {
-  qrcodename: string = "http://pyticketingsystem.com/events/";
+  qrcodename: string = environment.website;
   title = 'generate-qrcode';
   elementType: 'img';
   value: string;
@@ -79,7 +80,7 @@ export class CreateventComponent implements OnInit {
   }
 
   initiallize(){
-    // alert('initialize');
+    alert('initialize');
     this.api._getAPI('master/category/list').pipe(
       catchError(err => {
           // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
@@ -88,7 +89,7 @@ export class CreateventComponent implements OnInit {
     )
     .subscribe(
         res  => {
-          // alert('HTTP response'+ JSON.stringify(res));
+          alert('HTTP response'+ JSON.stringify(res));
           this.categories = res.data;
         },
         err => {
@@ -140,6 +141,7 @@ export class CreateventComponent implements OnInit {
               return;
             } else {
               this.value = this.qrcodename + res.data.objectId + '/'+ res.data.title;
+              alert('this.value' + this.value);
               //alert('res.data.objectId' + res.data.objectId);
               this.display = true;
               const dialogRef = this.matDialog.open(EventDialog, {
@@ -176,34 +178,14 @@ export class CreateventComponent implements OnInit {
           },
           err => {
             if(err.length >0){
-              //alert('HTTP Error'+ err)
+              alert('Error'+ err)
             }
           }
       );
     }else{
-      // alert('Please fill details...');
+      alert('Please fill details...');
     }
   }
-
-  
-//   makePdf() {
-//     var DocumentContainer = document.getElementById('content');
-//     var html = '<html><head>'+
-//                '<link href="css/template.css" rel="stylesheet" type="text/css" />'+
-//                '</head><body style="background:#ffffff;">'+
-//                DocumentContainer.innerHTML+
-//                '</body></html>';
-
-//     var WindowObject = window.open("", "PrintWindow",
-//     "width=auto,height=auto,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes, _blank");
-//     WindowObject.document.writeln(DocumentContainer.innerHTML);
-//     WindowObject.document.close();
-//     WindowObject.focus();
-//     WindowObject.print();
-//     WindowObject.close();
-    
-//     document.getElementById('print_link').style.display='block';
-//   }
 
 }
 
@@ -216,13 +198,13 @@ export class EventDialog {
   elementType: 'img';
 
   display: boolean;
-  qrcodename: string = "http://pyticketingsystem.com/events/id=";
+  // qrcodename: string = "http://pyticketingsystem.com/events/id=";
   constructor(
     public dialogRef: MatDialogRef<EventDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
-      this.value = this.qrcodename;
+      // this.value = this.qrcodename;
       this.display = true;
-      console.log('Data' , data);      
+      // console.log('Data' , data);      
     }
 
 
