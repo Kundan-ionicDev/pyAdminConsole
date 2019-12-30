@@ -125,7 +125,7 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Address</label>
               <div class="col-sm-8">
-                <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" 
+                <input ngx-google-places-autocomplete  #placesRef="ngx-places" (change)="handleAddressChange($event)" (onAddressChange)="handleAddressChange($event)" 
                 data-toggle="tooltip" title="Enter Event Venue!" data-placement="bottom" 
                   formControlName="address" class="form-control1"/>
 
