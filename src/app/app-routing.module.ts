@@ -12,6 +12,7 @@ import { CouponcreateComponent } from './pages/couponcreate/couponcreate.compone
 import { LotteryOneComponent } from './pages/lottery-one/lottery-one.component';
 import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.component';
 import { LotteryhistoryComponent } from './pages/lotteryhistory/lotteryhistory.component';
+import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 
 
 const routes: Routes = [
@@ -29,12 +30,13 @@ const routes: Routes = [
     { path: 'couponcreate', component: CouponcreateComponent },
     { path: 'generatelottery', component: LotteryOneComponent },
     { path: 'lotteryrule', component: LotteryrulesComponent },
-    { path: 'lotteryhistory', component: LotteryhistoryComponent }
+    { path: 'lotteryhistory', component: LotteryhistoryComponent },
+    { path: 'passwordreset', component: ResetpasswordComponent }
   ] },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{ useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

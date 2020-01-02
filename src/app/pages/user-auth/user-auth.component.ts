@@ -5,6 +5,7 @@ import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
+
 @Component({
   selector: 'app-user-auth',
   templateUrl: './user-auth.component.html',
@@ -13,11 +14,12 @@ import { throwError } from 'rxjs';
 export class UserAuthComponent implements OnInit {
   userAuth: FormGroup;
   submitted: boolean;
+  passwordchnge: boolean = false;
 
   constructor(
     public api: EventsapiService,
     private formBuilder: FormBuilder,
-    public route: Router
+    public route: Router,
   ) { }
 
   ngOnInit() {
@@ -72,5 +74,18 @@ export class UserAuthComponent implements OnInit {
     }
     
   }
+
+  showHide(){
+    if(this.passwordchnge == false){
+      this.passwordchnge = true;
+    }else{
+      this.passwordchnge = false;
+    }
+  }
+
+  resetpassword(){
+     this.passwordchnge = false;
+
+   }
 
 }

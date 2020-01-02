@@ -1,35 +1,56 @@
 <div class="login-logo" id="login">
-  <a href="index.html">
-    <!-- <img src="images/logo.png" alt=""/> -->
-    PY-Ticketing Admin
-  </a>
+    PY-Ticket Admin
 </div>
-<h2 class="form-heading">login</h2>
-<div class="app-cam">
-  <form [formGroup]="userAuth" (ngSubmit)="login()">
-    <input type="text" class="text" placeholder="E-mail address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-        <div *ngIf="f.email.errors.required">Email is required</div>
-        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+<div *ngIf="passwordchnge == false">
+  <h2 class="form-heading">login</h2>
+  <div class="app-cam">
+    <form [formGroup]="userAuth" (ngSubmit)="login()">
+      <input type="text" class="text" placeholder="E-mail address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+      </div>
+  
+      <input type="password" placeholder="Password" formControlName="password" 
+      [ngClass]="{ 'is-invalid': submitted && f.password.errors }"> 
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
     </div>
-
-    <input type="password" placeholder="Password" formControlName="password" 
-    [ngClass]="{ 'is-invalid': submitted && f.password.errors }"> 
-    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-      <div *ngIf="f.password.errors.required">Password is required</div>
-      <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+  
+      <div class="submit">
+        <input type="submit"  value="Login">
+        <!-- <button class="btn-success btn" >Login</button> -->
+      </div>
+      <ul class="new">
+        <li class="new_left">
+          <p>
+            <!-- <a [routerLink]="['passwordreset']">Reset Password</a> -->
+            <a (click)="showHide()">Reset Password</a>
+          </p>
+        </li>
+        <!-- <li class="new_right"><p class="sign" >New here ?<a href="register.html"> Sign Up</a></p></li> -->
+        <div class="clearfix"></div>
+      </ul>
+    </form>
+</div>
+</div>
+<div *ngIf="passwordchnge == true">
+  <h2 class="form-heading">Reset Password</h2>
+  <div class="app-cam">
+      <input type="text" class="text" placeholder="E-mail address" />
+      <div class="submit">
+        <input type="submit"  value="Reset">
+      </div>
+      <ul class="new">
+        <li class="new_left">
+          <p>
+            <a (click)="resetpassword()">Login</a>
+          </p>
+        </li>
+        <div class="clearfix"></div>
+      </ul>
+   
   </div>
-
-    <div class="submit">
-      <input type="submit"  value="Login">
-      <!-- <button class="btn-success btn" >Login</button> -->
-    </div>
-    <ul class="new">
-      <li class="new_left">
-        <p><a href="#">Preset Password</a></p>
-      </li>
-      <!-- <li class="new_right"><p class="sign" >New here ?<a href="register.html"> Sign Up</a></p></li> -->
-      <div class="clearfix"></div>
-    </ul>
-  </form>
 </div>
+

@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="">PY Ticketing</a>
+      <a class="navbar-brand" href="">PY Ticket</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -28,7 +28,6 @@
             <a href="#"><i class="fa fa-laptop nav_icon"></i>Role Management<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
-                <a [routerLink]="['pagenotfound']">Application Admin</a>
                 <a [routerLink]="['pagenotfound']">Account Admin</a>
                 <a [routerLink]="['pagenotfound']">Event Admin</a>
                 <a [routerLink]="['pagenotfound']">Event User</a>
@@ -64,9 +63,9 @@
               <li>
                 <a [routerLink]="['lotteryrule']">Create Lottery</a>
               </li>
-              <li>
+              <!-- <li>
                 <a [routerLink]="['lotteryhistory']">History</a>
-              </li>
+              </li> -->
             </ul>
             <!-- /.nav-second-level -->
           </li>
@@ -76,6 +75,9 @@
             <ul class="nav nav-second-level">
               <li>
                 <a [routerLink]="['viewevents']">View Events</a>
+              </li>
+              <li>
+                <a [routerLink]="['lotteryhistory']">Lottery History</a>
               </li>
               <li>
                 <a [routerLink]="['viewusers']">View Users</a>

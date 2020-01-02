@@ -25,6 +25,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { LotteryhistoryComponent } from './pages/lotteryhistory/lotteryhistory.component';
+import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { LotteryhistoryComponent } from './pages/lotteryhistory/lotteryhistory.c
     LotteryOneComponent,
     EventDialog,
     LotteryrulesComponent,
-    LotteryhistoryComponent
+    LotteryhistoryComponent,
+    ResetpasswordComponent,
   ],
 
   entryComponents: [

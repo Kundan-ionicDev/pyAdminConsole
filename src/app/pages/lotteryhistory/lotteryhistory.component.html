@@ -4,68 +4,47 @@
         <h3>Lottery History</h3>
         <div class="container">
           <div class="row">
-            <div class="col-lg-12">
-              <div class="main-box clearfix">
-                <div class="table-responsive">
-                  <table class="table user-list">
-                    <thead>
-                      <tr>
-                        <!-- <th><span>Add/Show</span></th> -->
-                        <th><span>Category</span></th>
-                        <th><span>Event(s)</span></th>
-                        <th><span>&nbsp;</span></th>
-                        <th><span>&nbsp;</span></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td  class="text-center">
-                          <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
-                            name="selector1" class="form-control1">
-                            <option value="0">Select</option>
-                            <!-- <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option> -->
-    
-                          </select>
-                        </td>
-                        <td >
-                          <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
-                            name="selector1" class="form-control1">
-                            <option value="0">Select</option>
-                            <!-- <option *ngFor="let cat of eventList" [value]="cat.id">{{cat.title}}</option>
-     -->
-                          </select>
-                        </td>
-                        <td >
-                          <button class="btn-success btn">
-                            Search
-                          </button>&nbsp;
-                        </td>
-                        <td style="float: right;">
-                          <button class="btn-success btn">
-                            Export to excel
-                          </button>&nbsp;
-                        </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <div class="col-lg-3">
+              <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
+                    name="selector1" class="form-control1">
+                    <option value="0">Select</option>
+                  </select>
+            </div>
+            <div class="col-lg-3">
+              <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
+                    name="selector1" class="form-control1">
+                    <option value="0">Select</option>
+                  </select>
+            </div>
+            <div class="col-lg-3">
+              <button class="btn-success btn">
+                Search
+              </button>
+            </div>
+            <div class="col-lg-3">
+              <button class="btn-success btn">
+                Export to excel
+              </button>
             </div>
           </div>
-  
+          <div class="row">
+           <br />
+          </div>
+
           <div class="row">
             <div class="col-lg-12">
               <div class="main-box clearfix">
                 <div class="table-responsive">
-                  <table class="table user-list">
+                  <table class="table user-list" style="width: 100%;">
                     <thead>
                       <tr>
-                        <th><span>Full Nae</span></th>
-                        <th><span>checkInTime</span></th>
+                        <th><span>Name</span></th>
+                        <th><span>CheckIn</span></th>
                         <th class="text-center"><span>Status</span></th>
-                        <th><span>Email Id</span></th>
-                        <th><span>Event Title</span></th>
-                        <th><span>Booking Id</span></th>
-                        <th><span>Tickets Booked</span></th>
+                        <th><span>EmailId</span></th>
+                        <th><span>EventTitle</span></th>
+                        <th><span>BookingId</span></th>
+                        <th><span>CouponCode</span></th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -91,24 +70,22 @@
                           {{ user.bookingId }}
                         </td>
                         <td>
-                          {{ user.totalTickets }}
+                          <!-- {{ user.totalTickets }} -->
+                          SAVE 100
                         </td>
                         <td style="width: 20%;">
-                          <a class="table-link">
-                            <span class="fa-stack">
-                              <i class="fa fa-square fa-stack-2x"></i>
-                              <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                            </span>
-                          </a>
-                          <a class="table-link danger">
-                            <span class="fa-stack">
-                              <i class="fa fa-square fa-stack-2x"></i>
-                              <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                            </span>
-                          </a>
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
+                            <label class="custom-control-label" for="defaultChecked2">&nbsp;Disbursement</label>
+                          </div>
+                          &nbsp;
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
+                            <label class="custom-control-label" for="defaultChecked2">&nbsp;Reimbursement</label>
+                          </div>
                         </td>
                       </tr>
-                     
+                     <hr>
                     </tbody>
                   </table>
                 </div>

@@ -118,8 +118,8 @@ export class CreateventComponent implements OnInit {
         "duration": this.createeventForm.value.duration,
         "eventCategoryId": this.createeventForm.value.category,
         "address": this.createeventForm.value.address,
-        "latitude": "17.000000",
-        "longitude": "17.000000",
+        "latitude": "0",
+        "longitude": "0",
         "maxSeat": this.createeventForm.value.admittance,
         "minSeat": this.createeventForm.value.userlimit,
         "isPaid": false, 
@@ -145,7 +145,7 @@ export class CreateventComponent implements OnInit {
                 return;
               } else {
                 this.value = this.qrcodename + res.data.objectId + '/'+ res.data.title;
-                alert('this.value' + this.value);
+                // alert('this.value' + this.value);
                 //alert('res.data.objectId' + res.data.objectId);
                 this.display = true;
                 const dialogRef = this.matDialog.open(EventDialog, {

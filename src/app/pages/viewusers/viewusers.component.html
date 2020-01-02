@@ -3,58 +3,42 @@
     <div class="xs">
       <h3>View Users</h3>
       <div class="container">
+
         <div class="row">
-          <div class="col-lg-12">
-            <div class="main-box clearfix">
-              <div class="table-responsive">
-                <table class="table user-list">
-                  <thead>
-                    <tr>
-                      <!-- <th><span>Add/Show</span></th> -->
-                      <th><span>Category</span></th>
-                      <th><span>Event(s)</span></th>
-                      <th><span>&nbsp;</span></th>
-                      <th><span>&nbsp;</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td  class="text-center">
-                        <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
-                          name="selector1" class="form-control1">
-                          <option value="0">Select</option>
-                          <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
-  
-                        </select>
-                      </td>
-                      <td >
-                        <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
-                          name="selector1" class="form-control1">
-                          <option value="0">Select</option>
-                          <option *ngFor="let cat of eventList" [value]="cat.id">{{cat.title}}</option>
-  
-                        </select>
-                      </td>
-                      <td >
-                        <button class="btn-success btn">
-                          Search
-                        </button>&nbsp;
-                        <!-- <button (click)="makePdf()" class="btn-success btn">Print
-                          <span class="glyphicon glyphicon-print"></span>
-                        </button> &nbsp; -->
-                      </td>
-                      <td style="float: right;">
-                        <button class="btn-success btn">
-                          Export to excel
-                        </button>&nbsp;
-                      </td>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <div class="col-lg-3">
+            <!-- <label>Category</label> -->
+            <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
+            name="selector1" class="form-control1">
+            <option value="0">Select</option>
+            <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+
+          </select>
+          </div>
+          <div class="col-lg-3">
+            <!-- <label>Events</label> -->
+            <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
+            name="selector1" class="form-control1">
+            <option value="0">Select</option>
+            <option *ngFor="let cat of eventList" [value]="cat.id">{{cat.title}}</option>
+
+          </select>
+          </div>
+          <div class="col-lg-3">
+            <label>&nbsp;</label>
+            <button class="btn-success btn">
+              Search
+            </button>
+          </div>
+          <div class="col-lg-3">
+            <label>&nbsp;</label>
+            <button class="btn-success btn">
+              Export to excel
+            </button>
           </div>
         </div>
 
+        <br />
+      
         <div class="row">
           <div class="col-lg-12">
             <div class="main-box clearfix">
@@ -62,7 +46,7 @@
                 <table class="table user-list">
                   <thead>
                     <tr>
-                      <th><span>Full Nae</span></th>
+                      <th><span>Full Name</span></th>
                       <th><span>checkInTime</span></th>
                       <th class="text-center"><span>Status</span></th>
                       <th><span>Email Id</span></th>

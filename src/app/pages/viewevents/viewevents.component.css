@@ -42,6 +42,40 @@ a {
     margin-right: 15px;
 }
 
+.table {
+    font-size: 14px;
+    border: none;
+  }
+  
+  .table tr th {
+    border-top: 0px solid #ccc;
+    border-bottom: 0px solid #ccc;
+    border-right: none;
+    border-left: 0px solid #ccc;
+    text-align: left;
+    background-color: #f1f1f1;
+  }
+  
+  .table tr th:last-child {
+    border-right: 0px solid #ccc;
+  }
+  
+  .table tr td {
+    border-top: none;
+    border-bottom: 1px solid #ccc;
+    border-right: none;
+    border-left: 0px solid #ccc;
+  }
+  
+  .table tr td:last-child {
+    border-right: 0px solid #ccc;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+  
+/* 
 .table thead tr th {
     text-transform: uppercase;
     font-size: 0.875em;
@@ -59,4 +93,4 @@ a {
     border-top: 1px solid #e7ebee;
     padding: 12px 8px;
 }
-    
+     */
