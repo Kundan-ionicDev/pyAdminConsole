@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>
+    Top 3 Winner's List
+</h2>
+
+<mat-dialog-content>
+    <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let winner of data">
+            <div>
+                <span matBadge=" {{ winner.Rank }}" matBadgeOverlap="false">{{ winner.WinnerName }}</span>
+            </div>
+        </mat-list-item>
+      </mat-list>
+
+    <!-- <mat-accordion>
+        <mat-expansion-panel *ngFor="let winner of data">
+          <mat-expansion-panel-header>
+            <mat-panel-title style="height: 10%;">
+                {{ winner.WinnerName }}
+              <span matBadge=" {{ winner.Rank }}" matBadgeOverlap="false"></span>
+            </mat-panel-title>
+            <mat-panel-description>
+              <span matBadge="4" matBadgeOverlap="false">Text with a badge</span>
+            </mat-panel-description>
+           
+          </mat-expansion-panel-header>
+         
+          <mat-form-field>
+            <mat-chip-list #chipList>
+                <mat-chip>{{ winner.Rank }}</mat-chip>
+                <mat-chip>Chip 2</mat-chip>
+              </mat-chip-list>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </mat-accordion> -->
+      
+        <!-- this trigger right away -->
+        <!-- <p><ng2-odometer [number]="2000" [config]="{ auto: false }" [observable]="observable" [theme]="'default'"></ng2-odometer></p>
+        <p><ng2-odometer [number]="2000" [config]="{ auto: false }" [observable]="observable" [theme]="'minimal'"></ng2-odometer></p>
+        <p><ng2-odometer [number]="2000" [config]="{ auto: false }" [observable]="observable" [theme]="'car'"></ng2-odometer></p>
+        <p><ng2-odometer [number]="2000" [config]="{ auto: false }" [observable]="observable" [theme]="'plaza'"></ng2-odometer></p>
+        <p><ng2-odometer [number]="2000" [config]="{ auto: false }" [observable]="observable" [theme]="'slot-machine'"></ng2-odometer></p>
+        <p><ng2-odometer [number]="2000" [config]="{ auto: false }" [observable]="observable" [theme]="'train-station'"></ng2-odometer></p> -->
+        <!-- <p><ng2-odometer [number]="10000" [config]="{ auto: true }" [observable]="observable" [theme]="'digital'"></ng2-odometer></p>
+        <p><button (click)="trigger()">Trigger</button></p> -->
+</mat-dialog-content>
+
+<mat-dialog-actions text-center>
+    <button mat-raised-button (click)="close()" color="primary">Ok</button>
+</mat-dialog-actions>

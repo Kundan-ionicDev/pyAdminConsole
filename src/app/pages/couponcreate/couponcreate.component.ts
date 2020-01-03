@@ -4,6 +4,17 @@ import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 declare var $: any;
+
+export const DateTimeValidator = (fc: FormControl) => {
+  const date = new Date(fc.value);
+  const isValid = !isNaN(date.valueOf());
+  return isValid ? null : {
+      isValid: {
+          valid: false
+      }
+  };
+};
+
 @Component({
   selector: 'app-couponcreate',
   templateUrl: './couponcreate.component.html',
@@ -17,6 +28,7 @@ export class CouponcreateComponent implements OnInit {
   submitted: boolean;
   eventList: any;
   categories: any;
+  couponList: any;
 
   constructor(
     public api: EventsapiService,
@@ -24,15 +36,10 @@ export class CouponcreateComponent implements OnInit {
   ) {
     this.initialize();
     this.couponForm = this.formBuilder.group({
-      Name: new FormControl('', Validators.required),
+      couponcode: new FormControl('', Validators.required),
       description: new FormControl('',Validators.required),
-      duration: new FormControl('',Validators.required),
-      category: new FormControl('',Validators.required),
-      address: new FormControl('',Validators.required),
-      admittance: new FormControl('',Validators.required),
-      userlimit: new FormControl('',Validators.required),
-      option : new FormControl('free',Validators.required),
-      admittype : new FormControl('',Validators.required),
+      eventId: new FormControl('',Validators.required),
+      expiredt: new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
     });
 
    }
@@ -45,6 +52,7 @@ export class CouponcreateComponent implements OnInit {
   get f() { return this.couponForm.controls; }
 
   add(){
+    this.initialize();
     if(this.showHide == false){
       this.buttontext = "Show Coupon list";
       this.showHide = true;
@@ -53,6 +61,44 @@ export class CouponcreateComponent implements OnInit {
       this.buttontext = "Add";
     }
   }
+
+  createCoupon(){
+    let params ={
+      "title": this.couponForm.value.couponcode,
+      "code": this.couponForm.value.couponcode,
+      "eventId": this.couponForm.value.eventId,
+      "description": this.couponForm.value.description,
+      "startDate": new Date(),
+      "endDate":  this.couponForm.value.expiredt,
+      "type": "type1",
+      "amount": 1
+    };
+    console.log('params' , params);
+
+    this.api._postAPI('coupon',params).pipe(
+      catchError(err => {
+          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
+          return throwError(err);
+      })
+    )
+    .subscribe(
+        res  => {
+          // alert('HTTP response'+ JSON.stringify(res));
+          if(res.status ==200){
+            alert(res.message);
+          }else{
+            alert(res.message);
+          }
+        },
+        err => {
+          if(err.length >0){
+            //alert('HTTP Error'+ err)
+          }
+        }
+    );
+  }
+
+  
 
   initialize(){
     
@@ -74,9 +120,7 @@ export class CouponcreateComponent implements OnInit {
         }
     );
 
-
-
-    this.api._getAPI('event/list').pipe(
+    this.api._getAPI('coupon').pipe(
       catchError(err => {
           // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
           return throwError(err);
@@ -85,7 +129,7 @@ export class CouponcreateComponent implements OnInit {
     .subscribe(
         res  => {
           // alert('HTTP response'+ JSON.stringify(res));
-          this.eventList = res.data;
+          this.couponList = res.data;
         },
         err => {
           if(err.length >0){
@@ -93,6 +137,8 @@ export class CouponcreateComponent implements OnInit {
           }
         }
     );
+
+
 
 
     // alert('initialize');

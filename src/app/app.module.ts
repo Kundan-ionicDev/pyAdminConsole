@@ -20,12 +20,27 @@ import { ApplicationadminComponent } from './pages/applicationadmin/applicationa
 import { CouponcreateComponent } from './pages/couponcreate/couponcreate.component';
 import { LotteryOneComponent } from './pages/lottery-one/lottery-one.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material/dialog';
+// import { MatDialogModule } from '@angular/material/dialog';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { LotteryrulesComponent } from './pages/lotteryrules/lotteryrules.component';
+import { LotteryrulesComponent, LotteryWinnerDialog } from './pages/lotteryrules/lotteryrules.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { LotteryhistoryComponent } from './pages/lotteryhistory/lotteryhistory.component';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
+import { Ng2OdometerModule } from 'ng2-odometer'; 
+import { NgxLoadingModule } from 'ngx-loading';
+
+import { MatDialogModule,
+  MatButtonModule, 
+  MatFormFieldModule, 
+  MatInputModule, 
+  MatRippleModule,
+  MatExpansionModule,
+  MatChipsModule,
+  MatBadgeModule,
+  MatListModule, 
+  MatToolbarModule, 
+  MatSliderModule,
+  MatIconModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -43,13 +58,15 @@ import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.comp
     CouponcreateComponent,
     LotteryOneComponent,
     EventDialog,
+    LotteryWinnerDialog,
     LotteryrulesComponent,
     LotteryhistoryComponent,
     ResetpasswordComponent,
+    
   ],
 
   entryComponents: [
-    EventDialog
+    EventDialog,LotteryWinnerDialog
   ],
 
   imports: [
@@ -64,7 +81,20 @@ import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.comp
     MatDialogModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    MatButtonModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatRippleModule,
+    MatExpansionModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatListModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSliderModule,
+    Ng2OdometerModule.forRoot(),
+    NgxLoadingModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]

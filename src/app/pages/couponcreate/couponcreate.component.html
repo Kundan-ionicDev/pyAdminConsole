@@ -2,7 +2,6 @@
   <div class="graphs">
     <div class="xs">
       <h3>Coupon Entry/ Manage</h3>
-
       <div class="row">
         <div class="col-lg-12">
           <div class="main-box clearfix">
@@ -27,7 +26,7 @@
                         Show Coupon list
                       </button>
                     </td>
-                    <td  *ngIf="showHide == false" class="text-center">
+                    <td *ngIf="showHide == false" class="text-center">
                       <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
                         name="selector1" class="form-control1">
                         <option value="0">Select</option>
@@ -66,31 +65,26 @@
                 <table class="table user-list">
                   <thead>
                     <tr>
-                      <th><span>Sr.No</span></th>
                       <th><span>Coupon Code</span></th>
                       <th><span>Description</span></th>
                       <th><span>Event Name</span></th>
                       <th><span>Expire</span></th>
                       <th>Action</th>
-                      <!-- <th>Coupon Option</th> -->
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        1
-                      </td>
+                    <tr *ngFor="let coupons of couponList">
                       <td class="text-center">
-                        BOH232
+                        {{ coupons.code }}
                       </td>
                       <td>
-                        20% OFF YOUR PURCHASE
+                        {{ coupons.description }}
                       </td>
                       <td>
-                        Nishant Suri at Mumbai Comedy Festival
+                        {{ coupons.fk_event.title }}
                       </td>
                       <td>
-                        Jan 03, 2021
+                        {{ coupons.endDate | date : 'EEEE, MMMM d, y'}}
                       </td>
                       <td style="width: 20%;">
                         <a href="" class="table-link">
@@ -106,38 +100,7 @@
                           </span>
                         </a>
                       </td>
-                     
-                    </tr>
-                    <tr>
-                      <td>
-                        1
-                      </td>
-                      <td class="text-center">
-                        BOH211
-                      </td>
-                      <td>
-                        50% OFF YOUR PURCHASE
-                      </td>
-                      <td>
-                        Arjit Singh Event
-                      </td>
-                      <td>
-                        Jan 03, 2021
-                      </td>
-                      <td style="width: 20%;">
-                        <a href="" class="table-link">
-                          <span class="fa-stack">
-                            <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                          </span>
-                        </a>
-                        <a href="" class="table-link danger">
-                          <span class="fa-stack">
-                            <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                          </span>
-                        </a>
-                      </td>
+
                     </tr>
                   </tbody>
                 </table>
@@ -149,22 +112,17 @@
 
       <div class="tab-content" *ngIf="showHide == true">
         <div class="tab-pane active">
-          <!-- <form class="form-horizontal"> -->
-          <!-- <input id="locationTextField" type="text" size="50"> -->
-          <form role="form" [formGroup]="couponForm" (ngSubmit)="add()" class="form-horizontal">
+          <form role="form" [formGroup]="couponForm" (ngSubmit)="createCoupon()" class="form-horizontal">
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Coupon Code </label>
               <div class="col-sm-8">
-                <input type="text" class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
-                  [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                <input type="text" class="form-control1" formControlName="couponcode" id="focusedinput"
+                  placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
                 <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
                   <div *ngIf="f.Name.errors.required">Name is required</div>
                   <div *ngIf="f.Name.errors.email">Name must be a valid</div>
                 </div>
               </div>
-              <!-- <div class="col-sm-2">
-                <p class="help-block">Your help text!</p>
-              </div> -->
             </div>
             <div class="form-group">
               <label for="disabledinput" class="col-sm-2 control-label">Description</label>
@@ -181,19 +139,12 @@
             <div class="form-group">
               <label for="selector1" class="col-sm-2 control-label">Event For</label>
               <div class="col-sm-8">
-                  <select name="selector1" id="selector1" formControlName="category" class="form-control1">
+                <select name="selector1" id="selector1" formControlName="eventId" class="form-control1">
                   <option value="0">Select</option>
                   <option *ngFor="let events of eventList" [value]="events.eventId">{{ events.title }}</option>
                 </select>
               </div>
             </div>
-
-            <!-- <div class="form-group">
-              <label for="inputPassword" class="col-sm-2 control-label">Quantity</label>
-              <div class="col-sm-8" data-toggle="tooltip" title="Enter Coupon Quantity!" data-placement="bottom">
-                <input type="number" class="form-control1" />
-              </div>
-            </div> -->
 
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Expire Date</label>
@@ -208,8 +159,7 @@
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                   <button class="btn-success btn">Submit</button> &nbsp;
-                  <button class="btn-default btn">Cancel</button>&nbsp;
-                  <button class="btn-inverse btn">Reset</button>
+                  <!-- <button class="btn-default btn">Cancel</button>&nbsp; -->
                 </div>
 
               </div>

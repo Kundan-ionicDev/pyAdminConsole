@@ -4,12 +4,10 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 declare var $: any;
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { environment } from 'src/environments/environment';
-// import { Address } from 'cluster';
-
 
 
 export const DateTimeValidator = (fc: FormControl) => {
@@ -78,7 +76,7 @@ export class CreateventComponent implements OnInit {
 
   handleAddressChange(address: Address) {
     // alert('address' + JSON.stringify(address));
-    console.log('address', JSON.stringify(address.geometry.location));
+    // console.log('address', JSON.stringify(address.geometry.location));
     this.location ={
       "lat": address.geometry.location.lat , "lon":address.geometry.location.lng
     }
@@ -136,8 +134,8 @@ export class CreateventComponent implements OnInit {
       )
       .subscribe(
           res  => {
-            //alert('HTTP response'+ JSON.stringify(res))
-            //  $("#content").show();
+            // alert('HTTP response'+ JSON.stringify(res))
+            // $("#content").show();
             if(res.status == 200){
               if (this.qrcodename == '') {
                 this.display = false;
@@ -146,7 +144,7 @@ export class CreateventComponent implements OnInit {
               } else {
                 this.value = this.qrcodename + res.data.objectId + '/'+ res.data.title;
                 // alert('this.value' + this.value);
-                //alert('res.data.objectId' + res.data.objectId);
+                // alert('res.data.objectId' + res.data.objectId);
                 this.display = true;
                 const dialogRef = this.matDialog.open(EventDialog, {
                   data: 
