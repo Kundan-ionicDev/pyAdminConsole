@@ -73,7 +73,8 @@ export class CouponcreateComponent implements OnInit {
       "type": "type1",
       "amount": 1
     };
-    console.log('params' , params);
+   
+    console.log('params' , params );
 
     this.api._postAPI('coupon',params).pipe(
       catchError(err => {

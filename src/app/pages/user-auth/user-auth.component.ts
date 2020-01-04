@@ -23,13 +23,14 @@ export class UserAuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    localStorage.removeItem('token');
     this.userAuth = this.formBuilder.group({
-      email: new FormControl('admin1@gmail.com', Validators.compose([
+      email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.email,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      password: new FormControl('password',[Validators.required, Validators.minLength(6)])
+      password: new FormControl('',[Validators.required, Validators.minLength(6)])
     });
   }
 
@@ -38,7 +39,7 @@ export class UserAuthComponent implements OnInit {
 
   login(){
     this.submitted = true;
-    this.route.navigateByUrl('main');
+    // this.route.navigateByUrl('main');
     if(this.userAuth.valid){
       // this.route.navigateByUrl('main');
       let params = {
@@ -58,6 +59,7 @@ export class UserAuthComponent implements OnInit {
             // $("#content").show();
             if(res.status == 200){
               this.route.navigateByUrl('main');
+              localStorage.setItem("token", res.data.token);
               localStorage.setItem("UserName", res.data.name);
             }else{
               alert('Error!!!' + res.data);

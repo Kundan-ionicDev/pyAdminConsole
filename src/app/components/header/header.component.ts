@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 // import * as $ from 'jquery';
 declare var $:any;
 
@@ -10,11 +11,20 @@ declare var $:any;
 export class HeaderComponent implements OnInit {
   userName: string;
 
-  constructor() { }
+  constructor(
+    public route: Router,
+  ) { }
 
   ngOnInit() {
     $('#side-menu').metisMenu();
+    // localStorage.removeItem('token');
     this.userName = localStorage.getItem("UserName");
+    var token = localStorage.getItem("token");
+    if(token == null || token == undefined){
+      alert('Token Expired. Please login again');
+      this.route.navigateByUrl('userAuth');
+    }
+    console.log(token);
   }
 
 }
