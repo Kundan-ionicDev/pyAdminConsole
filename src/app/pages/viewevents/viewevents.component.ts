@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { EventDialog } from '../createvent/createvent.component';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 declare var $: any;
 
 @Component({
@@ -51,7 +52,8 @@ export class VieweventsComponent implements OnInit {
   }
 
   previewEvent(event:any){
-    this.value = this.qrcodename + "asdadadasd" + '/'+ "arjit";
+    // console.log('event', JSON.stringify(event));
+    this.value = environment.website + event.eventId + '/'+ event.title;
     //alert('res.data.objectId' + res.data.objectId);
     this.display = true;
     const dialogRef = this.matDialog.open(EventDialog, {
