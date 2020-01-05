@@ -32,6 +32,8 @@ export class NgxQrCode {
 
 export class CreateventComponent implements OnInit {
   qrcodename: string = environment.website;
+  angForm: FormGroup;
+
   title = 'generate-qrcode';
   elementType: 'img';
   value: string;
@@ -39,11 +41,13 @@ export class CreateventComponent implements OnInit {
   public myAngularxQrCode: string = this.qrcodename;
   public qrdata: string = null;
   createeventForm: FormGroup;
-  submitted: boolean;
+  submitted = false;
+
   categories: any;
   @ViewChild("placesRef",{ static : true }) placesRef : GooglePlaceDirective;
   location: any;
-  
+  registerForm: FormGroup;
+
   constructor(
     private matDialog: MatDialog,
     private formBuilder: FormBuilder,
@@ -62,8 +66,8 @@ export class CreateventComponent implements OnInit {
       startdate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
       endate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
       contactpname : new FormControl('',Validators.required),
-      contactpnumber : new FormControl('',Validators.required),
-      duration: new FormControl('',Validators.required),
+      contactpnumber : new FormControl('', [Validators.required, Validators.pattern('[6-9]\\d{9}'), Validators.maxLength(10)]),
+      duration: new FormControl('',[Validators.required, Validators.pattern('[6-9]\\d{9}'), Validators.maxLength(10)]),
       category: new FormControl('',Validators.required),
       address: new FormControl('',Validators.required),
       admittance: new FormControl('',Validators.required),
@@ -102,9 +106,13 @@ export class CreateventComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.createeventForm.controls; }
+  get f() { 
+    // alert('ddddd');
+    return this.createeventForm.controls; 
+  }
 
   generateQR(){
+    this.submitted = true;
     if(this.createeventForm.valid){
       let params =  {
         "title": this.createeventForm.value.Name,
@@ -189,7 +197,7 @@ export class CreateventComponent implements OnInit {
           }
       );
     }else{
-      alert('Please fill details...');
+      alert('All Fields are mandatory');
     }
   }
 

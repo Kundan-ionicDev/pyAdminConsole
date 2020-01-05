@@ -1,7 +1,12 @@
 #content {
     background-color:'#FAA';
+    overflow-y: hidden;
   }
 
   invalid-feedback{
+    color: red;
+  }
+
+  .alert-light{
     color: red;
   }

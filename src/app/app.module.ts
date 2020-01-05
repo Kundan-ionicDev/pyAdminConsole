@@ -13,7 +13,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { QRCodeModule } from 'angularx-qrcode';
 import { HttpClientModule } from '@angular/common/http';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { VieweventsComponent } from './pages/viewevents/viewevents.component';
 import { ViewusersComponent } from './pages/viewusers/viewusers.component';
 import { ApplicationadminComponent } from './pages/applicationadmin/applicationadmin.component';
@@ -75,7 +75,7 @@ import { MatDialogModule,
     NgxQRCodeModule,
     QRCodeModule,
     HttpClientModule,
-    FormsModule,
+    // FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,

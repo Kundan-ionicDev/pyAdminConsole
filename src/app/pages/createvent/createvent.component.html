@@ -1,4 +1,4 @@
-<div id="page-wrapper">
+<div id="page-wrapper" style="position:relative;overflow-y:scroll;">
   <div class="graphs">
     <div class="xs">
       <h3>Create Event</h3>
@@ -8,10 +8,11 @@
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Event Name </label>
               <div class="col-sm-8">
+
                 <input type="text" data-toggle="tooltip" title="Enter Event Name!" data-placement="bottom"
                   class="form-control1" formControlName="Name" id="focusedinput" placeholder="Name"
                   [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
-                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                <div *ngIf="submitted && f.Name.errors" class="alert-light">
                   <div *ngIf="f.Name.errors.required">Name is required</div>
                   <div *ngIf="f.Name.errors.email">Name must be a valid</div>
                 </div>
@@ -24,9 +25,8 @@
                 <input type="text" data-toggle="tooltip" title="Enter Event Description!" data-placement="bottom"
                   formControlName="description" class="form-control1" id="disabledinput" placeholder="Description"
                   [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
-                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                  <div *ngIf="f.description.errors.required">Description is required</div>
-                  <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
+                <div *ngIf="submitted && f.description.errors" class="alert-light">
+                  <div *ngIf="f.description.errors.required">*Event Description is required.</div>
                 </div>
               </div>
             </div>
@@ -40,11 +40,8 @@
                   class="form-control1" id="disabledinput" placeholder="2019-12-11"
                   [ngClass]="{ 'is-invalid': submitted && f.startdate.errors }" />
                 <owl-date-time #startdt1></owl-date-time>
-                <!-- <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time"> -->
-
-                <div *ngIf="submitted && f.startdate.errors" class="invalid-feedback">
-                  <div *ngIf="f.startdate.errors.required">startdate is required</div>
-                  <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
+              <div *ngIf="submitted && f.startdate.errors" class="alert-light">
+                  <div *ngIf="f.startdate.errors.required">*Event Start date is required.</div>
                 </div>
               </div>
             </div>
@@ -59,9 +56,8 @@
                   placeholder="2019-12-11" [ngClass]="{ 'is-invalid': submitted && f.endate.errors }" />
                 <owl-date-time #enddt1></owl-date-time>
 
-                <div *ngIf="submitted && f.endate.errors" class="invalid-feedback">
-                  <div *ngIf="f.endate.errors.required">End Date is required</div>
-                  <!-- <div *ngIf="f.description.errors.email">Name must be a valid</div> -->
+                <div *ngIf="submitted && f.endate.errors" class="alert-light">
+                  <div *ngIf="f.endate.errors.required">*Event End Date is required.</div>
                 </div>
               </div>
             </div>
@@ -74,37 +70,42 @@
                   class="form-control1" formControlName="contactpname" id="focusedinput"
                   placeholder="Enter Contact Person Name!"
                   [ngClass]="{ 'is-invalid': submitted && f.contactpname.errors }" />
-                <div *ngIf="submitted && f.contactpname.errors" class="invalid-feedback">
-                  <div *ngIf="f.contactpname.errors.required">Person name is required</div>
-                </div>
+                <div *ngIf="submitted && f.contactpname.errors" class="alert-light">
+                  <div *ngIf="f.contactpname.errors.required">*Person name is required</div>
+                </div>                
               </div>
             </div>
 
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Contact Number </label>
               <div class="col-sm-8">
-                <input type="text" data-toggle="tooltip" title="Enter Contact Person Number !" data-placement="bottom"
+                <input type="number" minlength="1" maxlength="10" data-toggle="tooltip" title="Enter Contact Person Number !" data-placement="bottom"
                   class="form-control1" formControlName="contactpnumber" id="focusedinput"
                   placeholder="Enter Contact Person Number!"
                   [ngClass]="{ 'is-invalid': submitted && f.contactpnumber.errors }" />
-                <div *ngIf="submitted && f.contactpnumber.errors" class="invalid-feedback">
-                  <div *ngIf="f.contactpnumber.errors.required">Contact Number is required</div>
-                  <div *ngIf="f.contactpnumber.errors.email">Contact Number must be a valid</div>
+                <div *ngIf="submitted && f.contactpnumber.errors" class="alert-light">
+                  <div *ngIf="f.contactpnumber.errors.required">*Contact Number is required</div>
+                  <div *ngIf="f.contactpnumber.errors.number">*Contact Number must be a valid</div>
                 </div>
               </div>
+
             </div>
 
 
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Duration</label>
               <div class="col-sm-8">
-                <input type="text" data-toggle="tooltip" title="Enter Event Duration!" data-placement="bottom"
+                <input type="number" data-toggle="tooltip" title="Enter Event Duration!" data-placement="bottom"
                   formControlName="duration" class="form-control1" id="inputPassword" placeholder="Duration"
                   [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" />
-                <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
-                  <div *ngIf="f.duration.errors.required">Event Duration is required</div>
-                  <!-- <div *ngIf="f.duration.errors.email">Name must be a valid</div> -->
+                <div *ngIf="submitted && f.duration.errors" class="alert-light">
+                  <div *ngIf="f.duration.errors.required">*Event Duration is required</div>
                 </div>
+                <!-- <div *ngIf="createeventForm.controls['duration'].invalid && (createeventForm.controls['duration'].dirty || createeventForm.controls['duration'].touched)" class="alert-light">
+                    <div *ngIf="createeventForm.controls['duration'].errors.required">
+                       Contact Person is required
+                  </div>
+              </div> -->
               </div>
             </div>
 
@@ -117,6 +118,9 @@
                   <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
                
                 </select>
+                <div *ngIf="submitted && f.category.errors" class="alert-light">
+                    <div *ngIf="f.category.errors.required">*Event Category is required</div>
+                  </div>
               </div>
             </div>
 
@@ -129,11 +133,15 @@
                   <input type="text" data-toggle="tooltip" title="Enter Event Address!" data-placement="bottom" formControlName="address" class="form-control1"/>
 
                   <!-- <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
-                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                <div *ngIf="submitted && f.address.errors" class="alert-light">
                   <div *ngIf="f.address.errors.required">Address is required</div>
-                  <!-- <div *ngIf="f.address.errors.email">Name must be a valid</div> -->
                 </div>
-              </div>
+                <!-- <div *ngIf="createeventForm.controls['address'].invalid && (createeventForm.controls['address'].dirty || createeventForm.controls['address'].touched)" class="alert-light">
+                    <div *ngIf="createeventForm.controls['address'].errors.required">
+                       Address is required
+                  </div>
+              </div> -->
+            </div>
             </div>
 
             <div class="form-group">
@@ -142,9 +150,8 @@
                 <input type="number" data-toggle="tooltip" title="Enter Max Admittance!" data-placement="bottom"
                   formControlName="admittance" class="form-control1" id="inputPassword" placeholder="Max Admittance"
                   [ngClass]="{ 'is-invalid': submitted && f.admittance.errors }">
-                <div *ngIf="submitted && f.admittance.errors" class="invalid-feedback">
+                <div *ngIf="submitted && f.admittance.errors" class="alert-light">
                   <div *ngIf="f.admittance.errors.required">Max Admittance is required</div>
-                  <!-- <div *ngIf="f.admittance.errors.email">Name must be a valid</div> -->
                 </div>
               </div>
             </div>
