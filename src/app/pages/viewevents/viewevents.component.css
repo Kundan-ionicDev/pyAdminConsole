@@ -13,7 +13,7 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-.table a.table-link.danger {
+/* .table a.table-link.danger {
     color: #e74c3c;
 }
 .label {
@@ -23,7 +23,6 @@
 }
 .user-list tbody td .user-subhead {
     font-size: 15px;
-    /* font-family: 'Courier New', Courier, monospace; */
 }
 .user-list tbody td .user-link {
     display: block;
@@ -73,7 +72,7 @@ a {
   
   .table-striped tbody tr:nth-of-type(odd) {
     background-color: #f9f9f9;
-  }
+  } */
   
 /* 
 .table thead tr th {

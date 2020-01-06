@@ -4,7 +4,7 @@
       <h3>Create Event</h3>
       <div class="tab-content">
         <div class="tab-pane active">
-          <form role="form" [formGroup]="createeventForm" (ngSubmit)="generateQR()" class="form-horizontal">
+          <form role="form" [formGroup]="createeventForm" class="form-horizontal">
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Event Name </label>
               <div class="col-sm-8">
@@ -34,38 +34,14 @@
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Address</label>
               <div class="col-sm-8">
-                <!-- <input ngx-google-places-autocomplete  #placesRef="ngx-places" (change)="handleAddressChange($event)" (onAddressChange)="handleAddressChange($event)" 
-                data-toggle="tooltip" title="Enter Event Venue!" data-placement="bottom" 
-                  formControlName="address" class="form-control1"/> -->
-                  <input type="text" data-toggle="tooltip" title="Enter Event Address!" data-placement="bottom" formControlName="address" class="form-control1"/>
 
-                  <!-- <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
+                <input type="text" data-toggle="tooltip" title="Enter Event Address!" data-placement="bottom"
+                  formControlName="address" class="form-control1" />
                 <div *ngIf="submitted && f.address.errors" class="alert-light">
                   <div *ngIf="f.address.errors.required">Address is required</div>
                 </div>
-                <!-- <div *ngIf="createeventForm.controls['address'].invalid && (createeventForm.controls['address'].dirty || createeventForm.controls['address'].touched)" class="alert-light">
-                    <div *ngIf="createeventForm.controls['address'].errors.required">
-                       Address is required
-                  </div>
-              </div> -->
-            </div>
-            </div>
-            <!-- <div class="form-group">
-              <label for="disabledinput" class="col-sm-2 control-label">Start Date</label>
-              <div class="col-sm-8">
-                <input [owlDateTime]="startdt1" [owlDateTimeTrigger]="startdt1" data-toggle="tooltip"
-                  title="Enter Event StartDate!" data-placement="bottom" formControlName="startdate"
-                  class="form-control1" id="disabledinput" placeholder="2019-12-11"
-                  [ngClass]="{ 'is-invalid': submitted && f.startdate.errors }" />
-                <owl-date-time #startdt1></owl-date-time>
-              <div *ngIf="submitted && f.startdate.errors" class="alert-light">
-                  <div *ngIf="f.startdate.errors.required">*Event Start date is required.</div>
-                </div>
               </div>
-            </div> -->
-
-
-
+            </div>
             <div class="form-group">
               <label for="disabledinput" class="col-sm-2 control-label">Start Date</label>
               <div class="col-sm-3">
@@ -74,7 +50,7 @@
                   class="form-control1" id="disabledinput" placeholder="2019-12-11"
                   [ngClass]="{ 'is-invalid': submitted && f.startdate.errors }" />
                 <owl-date-time #startdt1></owl-date-time>
-              <div *ngIf="submitted && f.startdate.errors" class="alert-light">
+                <div *ngIf="submitted && f.startdate.errors" class="alert-light">
                   <div *ngIf="f.startdate.errors.required">*Event Start date is required.</div>
                 </div>
               </div>
@@ -102,13 +78,13 @@
                   [ngClass]="{ 'is-invalid': submitted && f.contactpname.errors }" />
                 <div *ngIf="submitted && f.contactpname.errors" class="alert-light">
                   <div *ngIf="f.contactpname.errors.required">*Person name is required</div>
-                </div>                
+                </div>
               </div>
               <label for="focusedinput" class="col-sm-2 control-label">Contact Number </label>
               <div class="col-sm-3">
-                <input type="number" minlength="1" maxlength="10" data-toggle="tooltip" title="Enter Contact Person Number !" data-placement="bottom"
-                  class="form-control1" formControlName="contactpnumber" id="focusedinput"
-                  placeholder="Enter Contact Person Number!"
+                <input type="number" minlength="1" maxlength="10" data-toggle="tooltip"
+                  title="Enter Contact Person Number !" data-placement="bottom" class="form-control1"
+                  formControlName="contactpnumber" id="focusedinput" placeholder="Enter Contact Person Number!"
                   [ngClass]="{ 'is-invalid': submitted && f.contactpnumber.errors }" />
                 <div *ngIf="submitted && f.contactpnumber.errors" class="alert-light">
                   <div *ngIf="f.contactpnumber.errors.required">*Contact Number is required</div>
@@ -116,21 +92,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- <div class="form-group">
-              <label for="focusedinput" class="col-sm-2 control-label">Contact Number </label>
-              <div class="col-sm-8">
-                <input type="number" minlength="1" maxlength="10" data-toggle="tooltip" title="Enter Contact Person Number !" data-placement="bottom"
-                  class="form-control1" formControlName="contactpnumber" id="focusedinput"
-                  placeholder="Enter Contact Person Number!"
-                  [ngClass]="{ 'is-invalid': submitted && f.contactpnumber.errors }" />
-                <div *ngIf="submitted && f.contactpnumber.errors" class="alert-light">
-                  <div *ngIf="f.contactpnumber.errors.required">*Contact Number is required</div>
-                  <div *ngIf="f.contactpnumber.errors.number">*Contact Number must be a valid</div>
-                </div>
-              </div>
-            </div> -->
-
 
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Duration</label>
@@ -149,30 +110,13 @@
                   id="selector1" formControlName="category" class="form-control1">
                   <option value="0">Select</option>
                   <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
-               
+
                 </select>
                 <div *ngIf="submitted && f.category.errors" class="alert-light">
-                    <div *ngIf="f.category.errors.required">*Event Category is required</div>
-                  </div>
+                  <div *ngIf="f.category.errors.required">*Event Category is required</div>
+                </div>
               </div>
             </div>
-<!-- 
-            <div class="form-group">
-              <label for="selector1" class="col-sm-2 control-label">Category</label>
-              <div class="col-sm-8">
-                <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom" name="selector1"
-                  id="selector1" formControlName="category" class="form-control1">
-                  <option value="0">Select</option>
-                  <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
-               
-                </select>
-                <div *ngIf="submitted && f.category.errors" class="alert-light">
-                    <div *ngIf="f.category.errors.required">*Event Category is required</div>
-                  </div>
-              </div>
-            </div> -->
-
-            
 
             <div class="form-group">
               <label for="inputPassword" class="col-sm-2 control-label">Max Admittance</label>
@@ -194,20 +138,6 @@
                 </div>
               </div>
             </div>
-
-
-            <!-- <div class="form-group">
-              <label for="inputPassword" class="col-sm-2 control-label">Max User Limit</label>
-              <div class="col-sm-8">
-                <input type="number" data-toggle="tooltip" title="Enter Max User Limit!" data-placement="bottom"
-                  formControlName="userlimit" class="form-control1" id="inputPassword" placeholder="Max User Limit"
-                  [ngClass]="{ 'is-invalid': submitted && f.userlimit.errors }">
-                <div *ngIf="submitted && f.userlimit.errors" class="invalid-feedback">
-                  <div *ngIf="f.userlimit.errors.required">Max User Limit is required</div>
-                </div>
-              </div>
-            </div> -->
-
 
             <div class="form-group">
               <label for="radio" class="col-sm-2 control-label">Fee Options</label>
@@ -231,24 +161,11 @@
               </div>
             </div>
 
-            <!-- <div class="form-group">
-              <label for="radio" class="col-sm-2 control-label">Admittance Type</label>
-              <div class="col-sm-8">
-                <div class="radio block"><label><input checked="checked" type="radio" data-toggle="tooltip"
-                      title="Single admittance entry" data-placement="bottom" name="admittype"
-                      formControlName="admittype" value="single"> Single Entry</label></div>
-                <div class="radio block"><label><input disabled type="radio" data-toggle="tooltip"
-                      title="Multiple admittance entry" data-placement="bottom" name="admittype"
-                      formControlName="admittype" value="multiple"> Multiple Entry</label></div>
-              </div>
-            </div> -->
-
             <div class="panel-footer">
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
-                  <button class="btn-success btn">Submit</button> &nbsp;
+                  <button class="btn-success btn" (click)="generateQR()">Submit</button> &nbsp;
                   <button class="btn-default btn" (click)="reset()">Cancel</button>&nbsp;
-                  <!-- <button class="btn-inverse btn">Reset</button> -->
                 </div>
 
               </div>
@@ -259,6 +176,3 @@
     </div>
   </div>
 </div>
-
-
-
