@@ -201,6 +201,10 @@ export class CreateventComponent implements OnInit {
     }
   }
 
+  reset(){
+    this.createeventForm.reset();
+  }
+
 }
 
 @Component({
