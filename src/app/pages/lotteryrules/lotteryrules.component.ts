@@ -3,7 +3,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError, Observable, Observer } from 'rxjs';
 import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -15,9 +15,10 @@ export class LotteryrulesComponent implements OnInit {
   eventList: any;
   value: any;
   couponList: any;
-  lotteryrule: any;
+  lotteryruleData: any;
   matslider: any;
-
+  loading = false;
+  lotteryrule: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private matDialog: MatDialog,
@@ -26,20 +27,15 @@ export class LotteryrulesComponent implements OnInit {
     this.lotteryrule = this.formBuilder.group({
       eventId: new FormControl('0', Validators.required),
       couponId: new FormControl('0',Validators.required),
-      rule1: new FormControl('ALL',Validators.required),
+      rule1: new FormControl('All',Validators.required),
       rule2: new FormControl('0',Validators.required),
       rule3: new FormControl('0',Validators.required),
     });
    }
 
   ngOnInit() {
-    this.api._getAPI('event/list').pipe(
-      catchError(err => {
-          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
+    this.loading = true;
+    this.api._getAPI('event/list').subscribe(
         res  => {
           // alert('HTTP response'+ JSON.stringify(res));
           this.eventList = res.data;
@@ -51,13 +47,7 @@ export class LotteryrulesComponent implements OnInit {
         }
     );
 
-    this.api._getAPI('coupon').pipe(
-      catchError(err => {
-          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
+    this.api._getAPI('coupon').subscribe(
         res  => {
           // alert('HTTP response'+ JSON.stringify(res));
           this.couponList = res.data;
@@ -68,50 +58,102 @@ export class LotteryrulesComponent implements OnInit {
           }
         }
     );
+    this.api._getAPI('lottery').subscribe(
+        res  => {
+          // alert('HTTP response'+ JSON.stringify(res));
+          this.lotteryruleData = res.data;
+          // console.log('Lottery Rule :', JSON.stringify(this.lotteryruleData));
+        },
+        err => {
+          if(err.length >0){
+            // alert('HTTP Error'+ err)
+          }
+        }
+    );
+    this.loading = false;
+
   }
 
   generateRule(){
+    this.loading = true;
     if(this.lotteryrule.valid){
-      console.log('lotteryrule :', this.lotteryrule.value);
+      // console.log('lotteryrule :', this.lotteryrule.value);
+      let params = {
+        "eventId": this.lotteryrule.value.eventId,
+        "couponId" : this.lotteryrule.value.couponId,
+        "rule1" : this.lotteryrule.value.rule1,
+        "rule2" : this.lotteryrule.value.rule2,
+        "rule3": this.lotteryrule.value.rule3
+      };
+
+      // console.log('params :', JSON.stringify(params));
+      this.api._postAPI('lottery',params).subscribe(
+          res  => {
+            // alert('Lottery Rule Response :'+ JSON.stringify(res));
+          },
+          err => {
+            if(err.length >0){
+              // alert('HTTP Error'+ err)
+            }
+          }
+      );
     }else{
-      alert('All options are mandatory');
-    }
+      // alert('All options are mandatory');
+    } 
+    this.loading = false;
   }
 
-  generateLottery(){
-    let winnerlist =[
-      {
-        "WinnerName":"Kundan Sakpal",
-        "WinnerMobile":"996006783",
-        "CouponCode":"SPECIAL100",
-        "Rank":"1"
-      },
-      {
-        "WinnerName":"Rohit Patil",
-        "WinnerMobile":"21311311",
-        "CouponCode":"SPECIAL100",
-        "Rank":"2"
-      },
-      {
-        "WinnerName":"Sanket Shinde",
-        "WinnerMobile":"9876578892",
-        "CouponCode":"SPECIAL100",
-        "Rank":"3"
-      }
-    ];
-    
 
-    const dialogRef = this.matDialog.open(LotteryWinnerDialog, {
-      data: winnerlist,
-      width: '400px',
-      hasBackdrop: true,
-      autoFocus : false
-    });
-   
-   
-    dialogRef.afterClosed().subscribe(result => {
-      this.value = result;
-    });
+
+  generateLottery(LotteryId:any){
+    this.loading = true;
+    let params = {
+      "lotteryId": LotteryId
+    };
+
+
+    console.log('params :', JSON.stringify(params));
+    this.api._postAPI('lottery/generate',params).pipe(
+      catchError(err => {
+          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
+          return throwError(err);
+      })
+    )
+    .subscribe(
+        res  => {
+          alert('Alert'+ JSON.stringify(res.message));
+          let winnerlist =[{
+            "Rank":1,
+            "WinnerName":"Kundan Sakpal"
+          },
+          {
+            "Rank":2,
+            "WinnerName":"Rohit Patil"
+          },
+          {
+            "Rank":3,
+            "WinnerName":"Sanket Shinde"
+          }];
+          const dialogRef = this.matDialog.open(LotteryWinnerDialog, {
+            data: winnerlist,
+            width: '400px',
+            hasBackdrop: true,
+            autoFocus : false
+          });
+        
+        
+          dialogRef.afterClosed().subscribe(result => {
+            this.value = result;
+          });
+        },
+        err => {
+          if(err.length >0){
+            // alert('HTTP Error'+ err)
+          }
+        }
+    );
+    this.loading = false;
+
   }
 }
 

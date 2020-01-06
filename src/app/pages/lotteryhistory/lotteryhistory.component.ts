@@ -12,28 +12,27 @@ export class LotteryhistoryComponent implements OnInit {
 
   eventusers: any;
   categories: any;
-
+  lotteryhistory: any;
+  eventlist: any;
+  loading = false;
   constructor(
     public api: EventsapiService,
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.initialize();
+    this.loading = false;
   }
 
 
   initialize(){
-    this.api._getAPI('event/booking').pipe(
-      catchError(err => {
-          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
+    this.loading = true;
+    this.api._getAPI('event/list').subscribe(
         res  => {
           // alert('HTTP response'+ JSON.stringify(res));
           console.log('res :', JSON.stringify(res));
-          this.eventusers = res.data;
+          this.eventlist = res.data;
         },
         err => {
           if(err.length >0){
@@ -42,25 +41,20 @@ export class LotteryhistoryComponent implements OnInit {
         }
     );
 
-
-     // alert('initialize');
-     this.api._getAPI('master/category/list').pipe(
-      catchError(err => {
-          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
+    this.api._getAPI('lottery/history').subscribe(
         res  => {
           // alert('HTTP response'+ JSON.stringify(res));
-          this.categories = res.data;
+          console.log('lottery/history :', JSON.stringify(res.data));
+          this.lotteryhistory = res.data;
+
         },
         err => {
           if(err.length >0){
-            // alert('HTTP Error'+ err)
+            //alert('HTTP Error'+ err)
           }
         }
     );
+    this.loading = false;
   }
 
 }

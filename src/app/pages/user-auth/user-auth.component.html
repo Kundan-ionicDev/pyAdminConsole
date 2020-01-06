@@ -2,6 +2,7 @@
    <img width="10%" height="10%" src="../../../assets/images/logo.png" alt=""/>
     <p>PY-Ticket Admin</p>
 </div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
 <div *ngIf="passwordchnge == false">
   <h2 class="form-heading">login</h2>
   <div class="app-cam">

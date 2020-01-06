@@ -33,7 +33,7 @@ export class NgxQrCode {
 export class CreateventComponent implements OnInit {
   qrcodename: string = environment.website;
   angForm: FormGroup;
-
+  public loading = false;
   title = 'generate-qrcode';
   elementType: 'img';
   value: string;
@@ -54,6 +54,7 @@ export class CreateventComponent implements OnInit {
     public api: EventsapiService
   ) {
     this.initiallize();
+   
     this.myAngularxQrCode = this.qrcodename;
   }
 
@@ -68,7 +69,7 @@ export class CreateventComponent implements OnInit {
       contactpname : new FormControl('',Validators.required),
       contactpnumber : new FormControl('', [Validators.required, Validators.pattern('[6-9]\\d{9}'), Validators.maxLength(10)]),
       duration: new FormControl('',[Validators.required, Validators.pattern('[6-9]\\d{9}'), Validators.maxLength(10)]),
-      category: new FormControl('',Validators.required),
+      category: new FormControl('0',Validators.required),
       address: new FormControl('',Validators.required),
       admittance: new FormControl('',Validators.required),
       userlimit: new FormControl('',Validators.required),
@@ -112,6 +113,7 @@ export class CreateventComponent implements OnInit {
   }
 
   generateQR(){
+    this.loading = true;
     this.submitted = true;
     if(this.createeventForm.valid){
       let params =  {
@@ -144,6 +146,7 @@ export class CreateventComponent implements OnInit {
           res  => {
             // alert('HTTP response'+ JSON.stringify(res))
             // $("#content").show();
+            this.loading = false;
             if(res.status == 200){
               if (this.qrcodename == '') {
                 this.display = false;
@@ -198,6 +201,7 @@ export class CreateventComponent implements OnInit {
       );
     }else{
       alert('All Fields are mandatory');
+      this.loading = false;
     }
   }
 

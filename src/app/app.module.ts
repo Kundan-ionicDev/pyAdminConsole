@@ -27,7 +27,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { LotteryhistoryComponent } from './pages/lotteryhistory/lotteryhistory.component';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { Ng2OdometerModule } from 'ng2-odometer'; 
-import { NgxLoadingModule } from 'ngx-loading';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 
 import { MatDialogModule,
   MatButtonModule, 
@@ -94,7 +94,14 @@ import { MatDialogModule,
     MatIconModule,
     MatSliderModule,
     Ng2OdometerModule.forRoot(),
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBorderRadius: '4px',
+      primaryColour: 'blue', 
+      secondaryColour: 'yellow', 
+      tertiaryColour: 'red'
+  })
   ],
   providers: [],
   bootstrap: [AppComponent]
