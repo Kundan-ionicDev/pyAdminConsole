@@ -91,7 +91,7 @@ export class CreateventComponent implements OnInit {
       startdate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
       endate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
       contactpname : new FormControl('',Validators.required),
-      contactpnumber : new FormControl('', [Validators.required, Validators.pattern('[6-9]\\d{9}'), Validators.maxLength(10)]),
+      contactpnumber : new FormControl('', Validators.required),
       duration: new FormControl('',Validators.required),
       category: new FormControl('0',Validators.required),
       address: new FormControl('',Validators.required),
@@ -145,6 +145,7 @@ export class CreateventComponent implements OnInit {
       this.api._postAPI('event/add',params).subscribe(
           res  => {
             this.loading = false;
+            this.reset();
             if(res.status == 200){
               if (this.qrcodename == '') {
                 this.display = false;
@@ -177,9 +178,8 @@ export class CreateventComponent implements OnInit {
                
                 dialogRef.afterClosed().subscribe(result => {
                   this.value = result;
+                  location.reload();
                 });
-  
-                this.createeventForm.reset();
               }
             }
             else{

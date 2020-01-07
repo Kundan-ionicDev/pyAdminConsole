@@ -84,7 +84,7 @@ export class CouponcreateComponent implements OnInit {
       "eventId": this.couponForm.value.eventId,
       "description": this.couponForm.value.description,
       "startDate": new Date(),
-      "endDate":  this.couponForm.value.expiredt,
+      // "endDate":  this.couponForm.value.expiredt,
       "type": "type1",
       "amount": 1
     };
@@ -98,6 +98,7 @@ export class CouponcreateComponent implements OnInit {
           if(res.status ==200){
             // alert(res.message);
             this.api._commonalertmsg(res.message);
+            this.couponForm.reset();
           }else{
             // alert(res.message);
             this.api._commonalertmsg(res.message);

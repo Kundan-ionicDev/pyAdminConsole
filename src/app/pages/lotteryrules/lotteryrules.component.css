@@ -5,3 +5,8 @@ ng2-odometer {
   span{
     color: rgb(196, 162, 162);
   }
+
+  .scrolling_div {
+    height: 515px;
+    overflow-y: scroll;
+  }

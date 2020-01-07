@@ -19,9 +19,9 @@
               </button>
             </div>
             <div class="col-lg-3">
-              <button class="btn-success btn">
+              <!-- <button class="btn-success btn">
                 Export to excel
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="row">
@@ -70,15 +70,29 @@
                           {{ user.code }}
                         </td>
                         <td style="width: 20%;">
-                          <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked2">&nbsp;Disbursement</label>
+                          <div >
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked1">
+                                <label class="custom-control-label" for="defaultChecked2">&nbsp;Disbursement</label>
+                              </div>
+                              &nbsp;
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked2">
+                                <label class="custom-control-label" for="defaultChecked2">&nbsp;Reimbursement</label>
+                              </div>
                           </div>
-                          &nbsp;
-                          <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
-                            <label class="custom-control-label" for="defaultChecked2">&nbsp;Reimbursement</label>
-                          </div>
+
+                          <!-- <div *ngIf="user.isReimbursment !=null">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="defaultChecked1">
+                              <label class="custom-control-label" for="defaultChecked2">&nbsp;Disbursement</label>
+                            </div>
+                            &nbsp;
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="defaultChecked2">
+                              <label class="custom-control-label" for="defaultChecked2">&nbsp;Reimbursement</label>
+                            </div>
+                          </div> -->
                         </td>
                       </tr>
                      <hr>

@@ -97,24 +97,24 @@ export class EventsapiService {
   }
 
   _commonalertmsg(content: any) {
-    // $.alert({
-    //   title: 'Alert!',
-    //     content: content,
-    // });
-    $.confirm({
-      title: 'Alert',
-      content: content,
-      type: 'orange',
-      typeAnimated: true,
-      buttons: {
-        tryAgain: {
-          text: 'Try again',
-          btnClass: 'btn-red',
-          action: function () {}
-        },
-        close: function () {}
-      }
+    $.alert({
+      title: 'Alert!',
+        content: content,
     });
+    // $.confirm({
+    //   title: 'Alert',
+    //   content: content,
+    //   type: 'orange',
+    //   typeAnimated: true,
+    //   buttons: {
+    //     tryAgain: {
+    //       text: 'Try again',
+    //       btnClass: 'btn-red',
+    //       action: function () {}
+    //     },
+    //     close: function () {}
+    //   }
+    // });
   }
 
 

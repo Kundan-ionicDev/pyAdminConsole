@@ -3,13 +3,26 @@
 </h2>
 
 <mat-dialog-content>
-    <mat-list role="list">
+    <div class="list-group" *ngFor="let winner of data">
+        <a  class="list-group-item list-group-item-action flex-column align-items-start active">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ winner.name }}</h5>
+            <small>{{ winner.bookingId }}</small>
+          </div>
+          <p class="mb-1">{{ winner.email }}</p>
+          <small>{{ winner.docType }} : {{ winner.docId }}</small>
+        </a>
+      </div>
+
+    <!-- <mat-list role="list">
         <mat-list-item role="listitem" *ngFor="let winner of data">
             <div>
                 {{ winner.name }}
+
             </div>
+            
         </mat-list-item>
-      </mat-list>
+      </mat-list> -->
 </mat-dialog-content>
 
 <mat-dialog-actions text-center>
