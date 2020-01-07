@@ -103,7 +103,7 @@ export class LotteryrulesComponent implements OnInit {
       // console.log('params :', JSON.stringify(params));
       this.api._postAPI('lottery',params).subscribe(
           res  => {
-            alert('Lottery Rule Response :'+ JSON.stringify(res));
+            // alert('Lottery Rule Response :'+ JSON.stringify(res));
             this.api._commonalertmsg(res.message);
           },
           err => {
@@ -130,12 +130,12 @@ export class LotteryrulesComponent implements OnInit {
     console.log('params :', JSON.stringify(params));
     this.api._postAPI('lottery/generate',params).subscribe(
         res  => {
-          alert('Alert'+ JSON.stringify(res));
+         // alert('Alert'+ JSON.stringify(res));
           this.api._commonalertmsg(res.data.uuid);
           this.api._getAPI('lottery/history?uuid='+res.data.uuid).subscribe(
             res  => {
-              alert('Lottery Winners :'+ JSON.stringify(res));
-              const dialogRef = this.matDialog.open(LotteryWinnerDialog, {
+             // alert('Lottery Winners :'+ JSON.stringify(res));
+             const dialogRef = this.matDialog.open(LotteryWinnerDialog, {
                 data: res.data,
                 width: '400px',
                 hasBackdrop: true,
