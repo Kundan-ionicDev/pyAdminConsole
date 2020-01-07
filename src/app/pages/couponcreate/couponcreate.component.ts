@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 declare var $: any;
 
 export const DateTimeValidator = (fc: FormControl) => {
@@ -14,6 +15,9 @@ export const DateTimeValidator = (fc: FormControl) => {
       }
   };
 };
+
+const PrimaryWhite = '#ffffff';
+const SecondaryGrey = '#ccc';
 
 @Component({
   selector: 'app-couponcreate',
@@ -30,6 +34,16 @@ export class CouponcreateComponent implements OnInit {
   categories: any;
   couponList: any;
 
+  @ViewChild('ngxLoading', { static: false }) ngxLoadingComponent: NgxLoadingComponent;
+  @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
+  public primaryColour = PrimaryWhite;
+  public secondaryColour = SecondaryGrey;
+  public coloursEnabled = false;
+  public loadingTemplate: TemplateRef<any>;
+  public config = { animationType: ngxLoadingAnimationTypes.none, primaryColour: this.primaryColour, secondaryColour: this.secondaryColour, tertiaryColour: this.primaryColour, backdropBorderRadius: '3px' };
+  
   constructor(
     public api: EventsapiService,
     private formBuilder: FormBuilder
@@ -63,6 +77,7 @@ export class CouponcreateComponent implements OnInit {
   }
 
   createCoupon(){
+    this.loading = true;
     let params ={
       "title": this.couponForm.value.couponcode,
       "code": this.couponForm.value.couponcode,
@@ -76,24 +91,22 @@ export class CouponcreateComponent implements OnInit {
    
     console.log('params' , params );
 
-    this.api._postAPI('coupon',params).pipe(
-      catchError(err => {
-          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
+    this.api._postAPI('coupon',params).subscribe(
         res  => {
+          this.loading = false;
           // alert('HTTP response'+ JSON.stringify(res));
           if(res.status ==200){
-            alert(res.message);
+            // alert(res.message);
+            this.api._commonalertmsg(res.message);
           }else{
-            alert(res.message);
+            // alert(res.message);
+            this.api._commonalertmsg(res.message);
           }
         },
         err => {
           if(err.length >0){
             //alert('HTTP Error'+ err)
+            this.api._commonErrormsg('Error Encounter',err);
           }
         }
     );
@@ -102,16 +115,9 @@ export class CouponcreateComponent implements OnInit {
   
 
   initialize(){
-    
-    this.api._getAPI('event/list').pipe(
-      catchError(err => {
-          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
+    this.loading = true;
+    this.api._getAPI('event/list').subscribe(
         res  => {
-          // alert('HTTP response'+ JSON.stringify(res));
           this.eventList = res.data;
         },
         err => {
@@ -139,9 +145,6 @@ export class CouponcreateComponent implements OnInit {
         }
     );
 
-
-
-
     // alert('initialize');
     this.api._getAPI('master/category/list').pipe(
       catchError(err => {
@@ -160,9 +163,11 @@ export class CouponcreateComponent implements OnInit {
           }
         }
     );
+    this.loading = false;
   }
 
   makePdf() {
+    this.loading = true;
     var DocumentContainer = document.getElementById('content');
     var html = '<html><head>'+
                '<link href="css/template.css" rel="stylesheet" type="text/css" />'+
@@ -179,5 +184,6 @@ export class CouponcreateComponent implements OnInit {
     WindowObject.close();
     
     document.getElementById('print_link').style.display='block';
+    this.loading = false;
   }
 }

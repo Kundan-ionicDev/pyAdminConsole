@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EventsapiService } from 'src/app/services/eventsapi.service';
 // import * as $ from 'jquery';
 declare var $:any;
+
 
 @Component({
   selector: 'app-header',
@@ -10,9 +12,10 @@ declare var $:any;
 })
 export class HeaderComponent implements OnInit {
   userName: string;
-
+ 
   constructor(
     public route: Router,
+    public api: EventsapiService
   ) { }
 
   ngOnInit() {
@@ -24,7 +27,6 @@ export class HeaderComponent implements OnInit {
       alert('Token Expired. Please login again');
       this.route.navigateByUrl('userAuth');
     }
-    console.log(token);
   }
 
 }

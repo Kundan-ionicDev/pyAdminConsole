@@ -1,10 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable, Observer } from 'rxjs';
 import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 
+const PrimaryWhite = '#ffffff';
+const SecondaryGrey = '#ccc';
 
 @Component({
   selector: 'app-lotteryrules',
@@ -17,8 +20,19 @@ export class LotteryrulesComponent implements OnInit {
   couponList: any;
   lotteryruleData: any;
   matslider: any;
-  loading = false;
   lotteryrule: FormGroup;
+
+  @ViewChild('ngxLoading', { static: false }) ngxLoadingComponent: NgxLoadingComponent;
+  @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
+  public primaryColour = PrimaryWhite;
+  public secondaryColour = SecondaryGrey;
+  public coloursEnabled = false;
+  public loadingTemplate: TemplateRef<any>;
+  public config = { animationType: ngxLoadingAnimationTypes.none, primaryColour: this.primaryColour, secondaryColour: this.secondaryColour, tertiaryColour: this.primaryColour, backdropBorderRadius: '3px' };
+
+  
   constructor(
     private formBuilder: FormBuilder,
     private matDialog: MatDialog,
@@ -37,12 +51,12 @@ export class LotteryrulesComponent implements OnInit {
     this.loading = true;
     this.api._getAPI('event/list').subscribe(
         res  => {
-          // alert('HTTP response'+ JSON.stringify(res));
           this.eventList = res.data;
         },
         err => {
           if(err.length >0){
             //alert('HTTP Error'+ err)
+            this.api._commonalertmsg(err);
           }
         }
     );
@@ -54,7 +68,7 @@ export class LotteryrulesComponent implements OnInit {
         },
         err => {
           if(err.length >0){
-            // alert('HTTP Error'+ err)
+            this.api._commonalertmsg(err);
           }
         }
     );
@@ -66,7 +80,7 @@ export class LotteryrulesComponent implements OnInit {
         },
         err => {
           if(err.length >0){
-            // alert('HTTP Error'+ err)
+            this.api._commonalertmsg(err);
           }
         }
     );
@@ -89,16 +103,18 @@ export class LotteryrulesComponent implements OnInit {
       // console.log('params :', JSON.stringify(params));
       this.api._postAPI('lottery',params).subscribe(
           res  => {
-            // alert('Lottery Rule Response :'+ JSON.stringify(res));
+            alert('Lottery Rule Response :'+ JSON.stringify(res));
+            this.api._commonalertmsg(res.message);
           },
           err => {
             if(err.length >0){
-              // alert('HTTP Error'+ err)
+              this.api._commonalertmsg(err);
             }
           }
       );
     }else{
       // alert('All options are mandatory');
+      this.api._commonalertmsg('All options are mandatory');
     } 
     this.loading = false;
   }
@@ -111,40 +127,33 @@ export class LotteryrulesComponent implements OnInit {
       "lotteryId": LotteryId
     };
 
-
     console.log('params :', JSON.stringify(params));
-    this.api._postAPI('lottery/generate',params).pipe(
-      catchError(err => {
-          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
+    this.api._postAPI('lottery/generate',params).subscribe(
         res  => {
-          alert('Alert'+ JSON.stringify(res.message));
-          let winnerlist =[{
-            "Rank":1,
-            "WinnerName":"Kundan Sakpal"
-          },
-          {
-            "Rank":2,
-            "WinnerName":"Rohit Patil"
-          },
-          {
-            "Rank":3,
-            "WinnerName":"Sanket Shinde"
-          }];
-          const dialogRef = this.matDialog.open(LotteryWinnerDialog, {
-            data: winnerlist,
-            width: '400px',
-            hasBackdrop: true,
-            autoFocus : false
-          });
-        
-        
-          dialogRef.afterClosed().subscribe(result => {
-            this.value = result;
-          });
+          alert('Alert'+ JSON.stringify(res));
+          this.api._commonalertmsg(res.data.uuid);
+          this.api._getAPI('lottery/history?uuid='+res.data.uuid).subscribe(
+            res  => {
+              alert('Lottery Winners :'+ JSON.stringify(res));
+              const dialogRef = this.matDialog.open(LotteryWinnerDialog, {
+                data: res.data,
+                width: '400px',
+                hasBackdrop: true,
+                autoFocus : false
+              });
+            
+            
+              dialogRef.afterClosed().subscribe(result => {
+                this.value = result;
+              });
+            },
+            err => {
+              if(err.length >0){
+                this.api._commonalertmsg(err);
+                }
+              }
+          );
+          
         },
         err => {
           if(err.length >0){

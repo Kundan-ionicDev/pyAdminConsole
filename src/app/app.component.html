@@ -1,16 +1,3 @@
 <router-outlet></router-outlet>
-<!-- <div class="my-container"> -->
-    <!-- <ng-template #customLoadingTemplate>
-        <div class="custom-class">
-            <h3>
-                Loading...
-            </h3>
-            <button (click)="showAlert()">
-                Click me!
-            </button>
-        </div>
-    </ng-template> -->
- 
-    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
-   
-<!-- </div> -->
+<ngx-loading [show]="loading" [config]="{animationType: ngxLoadingAnimationTypes.circleSwish, primaryColour: primaryColour, backdropBorderRadius: '3px'}"
+      [template]="loadingTemplate"></ngx-loading>

@@ -29,6 +29,7 @@ import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.comp
 import { Ng2OdometerModule } from 'ng2-odometer'; 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 
+
 import { MatDialogModule,
   MatButtonModule, 
   MatFormFieldModule, 

@@ -5,7 +5,7 @@
       <h3>Create Event</h3>
       <div class="tab-content">
         <div class="tab-pane active">
-          <form role="form" [formGroup]="createeventForm" class="form-horizontal">
+          <form role="form" [formGroup]="createeventForm" (ngSubmit)="CreateEvent()" class="form-horizontal">
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Event Name </label>
               <div class="col-sm-8">
@@ -68,7 +68,6 @@
                 </div>
               </div>
             </div>
-
 
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Contact Person </label>
@@ -165,7 +164,7 @@
             <div class="panel-footer">
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2" style="text-align: center;">
-                  <button class="btn-success btn" (click)="generateQR()">Submit</button> &nbsp;
+                  <button class="btn-success btn" >Submit</button> &nbsp;
                   <button class="btn-default btn" (click)="reset()">Cancel</button>&nbsp;
                 </div>
               </div>
@@ -176,4 +175,5 @@
     </div>
   </div>
 </div>
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+<ngx-loading [show]="loading" [config]="{animationType: ngxLoadingAnimationTypes.circleSwish, primaryColour: primaryColour, backdropBorderRadius: '3px'}"
+      [template]="loadingTemplate"></ngx-loading>

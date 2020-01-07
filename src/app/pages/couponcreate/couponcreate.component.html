@@ -12,59 +12,8 @@
             Show Coupon list
           </button>
         </div>
-        <!-- <div class="col-lg-12">
-          <div class="main-box clearfix">
-            <div class="table-responsive">
-              <table class="table user-list">
-                <thead>
-                  <tr>
-                    <th><span>Add/Show</span></th>
-                    <th *ngIf="showHide == false"><span>Category</span></th>
-                    <th *ngIf="showHide == false"><span>Event(s)</span></th>
-                    <th *ngIf="showHide == false"><span>&nbsp;</span></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <button (click)="add()" *ngIf="showHide == false" class="btn-success btn">
-                        Add
-                      </button>
-
-                      <button (click)="add()" *ngIf="showHide == true" class="btn-success btn">
-                        Show Coupon list
-                      </button>
-                    </td>
-                    <td *ngIf="showHide == false" class="text-center">
-                      <select data-toggle="tooltip" title="Select Event Category!" data-placement="bottom"
-                        name="selector1" class="form-control1">
-                        <option value="0">Select</option>
-                        <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
-
-                      </select>
-                    </td>
-                    <td *ngIf="showHide == false">
-                      <select data-toggle="tooltip" title="Select Event name!" data-placement="bottom"
-                        name="selector1" class="form-control1">
-                        <option value="0">Select</option>
-                        <option *ngFor="let cat of eventList" [value]="cat.id">{{cat.title}}</option>
-
-                      </select>
-                    </td>
-                    <td *ngIf="showHide == false">
-                      <button class="btn-success btn">
-                        Search
-                      </button>&nbsp;
-                      <button (click)="makePdf()" class="btn-success btn">Print
-                        <span class="glyphicon glyphicon-print"></span>
-                      </button> &nbsp;
-                    </td>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div> -->
       </div>
+      <br />
 
       <div id="content" class="container" *ngIf="showHide == false">
         <div class="row">
@@ -177,3 +126,5 @@
       </div>
     </div>
   </div>
+  <ngx-loading [show]="loading" [config]="{animationType: ngxLoadingAnimationTypes.circleSwish, primaryColour: primaryColour, backdropBorderRadius: '3px'}"
+  [template]="loadingTemplate"></ngx-loading>

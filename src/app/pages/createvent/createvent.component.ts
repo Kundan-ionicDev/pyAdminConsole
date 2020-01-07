@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { environment } from 'src/environments/environment';
+import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 
 
 export const DateTimeValidator = (fc: FormControl) => {
@@ -24,16 +25,19 @@ export class NgxQrCode {
   text: string;
 }
 
+const PrimaryWhite = '#ffffff';
+const SecondaryGrey = '#ccc';
+
 @Component({
   selector: 'app-createvent',
   templateUrl: './createvent.component.html',
   styleUrls: ['./createvent.component.css']
 })
 
+
 export class CreateventComponent implements OnInit {
   qrcodename: string = environment.website;
   angForm: FormGroup;
-  public loading = false;
   title = 'generate-qrcode';
   elementType: 'img';
   value: string;
@@ -48,19 +52,39 @@ export class CreateventComponent implements OnInit {
   location: any;
   registerForm: FormGroup;
 
+  @ViewChild('ngxLoading', { static: false }) ngxLoadingComponent: NgxLoadingComponent;
+  @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
+  public primaryColour = PrimaryWhite;
+  public secondaryColour = SecondaryGrey;
+  public coloursEnabled = false;
+  public loadingTemplate: TemplateRef<any>;
+  public config = { animationType: ngxLoadingAnimationTypes.none, primaryColour: this.primaryColour, secondaryColour: this.secondaryColour, tertiaryColour: this.primaryColour, backdropBorderRadius: '3px' };
+
+  
   constructor(
     private matDialog: MatDialog,
     private formBuilder: FormBuilder,
     public api: EventsapiService
   ) {
-    this.initiallize();
-   
-    this.myAngularxQrCode = this.qrcodename;
+     this.myAngularxQrCode = this.qrcodename;
   }
 
   ngOnInit() {
+    this.initiallize();
     $("#content").hide();
-    $('[data-toggle="tooltip"]').tooltip();   
+    $('[data-toggle="tooltip"]').tooltip();
+  }
+
+  handleAddressChange(address: Address) {
+    this.location ={
+      "lat": address.geometry.location.lat , "lon":address.geometry.location.lng
+    }
+  }
+
+  initiallize(){
+    this.loading = true;
     this.createeventForm = this.formBuilder.group({
       Name: new FormControl('', Validators.required),
       description: new FormControl('',Validators.required),
@@ -68,7 +92,7 @@ export class CreateventComponent implements OnInit {
       endate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
       contactpname : new FormControl('',Validators.required),
       contactpnumber : new FormControl('', [Validators.required, Validators.pattern('[6-9]\\d{9}'), Validators.maxLength(10)]),
-      duration: new FormControl('',[Validators.required, Validators.pattern('[6-9]\\d{9}'), Validators.maxLength(10)]),
+      duration: new FormControl('',Validators.required),
       category: new FormControl('0',Validators.required),
       address: new FormControl('',Validators.required),
       admittance: new FormControl('',Validators.required),
@@ -76,43 +100,25 @@ export class CreateventComponent implements OnInit {
       feesoption : new FormControl('',Validators.required),
       admittype : new FormControl('',Validators.required)
     });
-    
-  }
-
-  handleAddressChange(address: Address) {
-    // alert('address' + JSON.stringify(address));
-    // console.log('address', JSON.stringify(address.geometry.location));
-    this.location ={
-      "lat": address.geometry.location.lat , "lon":address.geometry.location.lng
-    }
-  }
-
-  initiallize(){
-    this.api._getAPI('master/category/list').pipe(
-      catchError(err => {
-          // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-          return throwError(err);
-      })
-    )
-    .subscribe(
+    this.api._getAPI('master/category/list').subscribe(
         res  => {
           this.categories = res.data;
         },
         err => {
           if(err.length >0){
-            // alert('HTTP Error'+ err)
+            this.api._commonalertmsg(err);
           }
         }
     );
+    this.loading = false;
   }
 
   // convenience getter for easy access to form fields
   get f() { 
-    // alert('ddddd');
     return this.createeventForm.controls; 
   }
 
-  generateQR(){
+  CreateEvent(){
     this.loading = true;
     this.submitted = true;
     if(this.createeventForm.valid){
@@ -122,7 +128,7 @@ export class CreateventComponent implements OnInit {
         "startDate": this.createeventForm.value.startdate,
         "endDate": this.createeventForm.value.endate,
         "contactPersonName": this.createeventForm.value.contactpname,
-        "contactPerson": this.createeventForm.value.contactpnumber,
+        "contactPerson": ""+this.createeventForm.value.contactpnumber+"",
         "duration": this.createeventForm.value.duration,
         "eventCategoryId": this.createeventForm.value.category,
         "address": this.createeventForm.value.address,
@@ -135,27 +141,15 @@ export class CreateventComponent implements OnInit {
         "perSeatCharge": 0
       };
 
-      console.log('form::', this.createeventForm);
-      this.api._postAPI('event/add',params).pipe(
-        catchError(err => {
-            // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-            return throwError(err);
-        })
-      )
-      .subscribe(
+      
+      this.api._postAPI('event/add',params).subscribe(
           res  => {
-            // alert('HTTP response'+ JSON.stringify(res))
-            // $("#content").show();
             this.loading = false;
             if(res.status == 200){
               if (this.qrcodename == '') {
                 this.display = false;
-                // alert("Please enter the name");
-                return;
               } else {
                 this.value = this.qrcodename + res.data.objectId + '/'+ res.data.title;
-                // alert('this.value' + this.value);
-                // alert('res.data.objectId' + res.data.objectId);
                 this.display = true;
                 const dialogRef = this.matDialog.open(EventDialog, {
                   data: 
@@ -181,7 +175,6 @@ export class CreateventComponent implements OnInit {
                   autoFocus : false
                 });
                
-               
                 dialogRef.afterClosed().subscribe(result => {
                   this.value = result;
                 });
@@ -190,27 +183,28 @@ export class CreateventComponent implements OnInit {
               }
             }
             else{
-              alert('Error !!!'+ res.message);
+              this.api._commonalertmsg(res.message);
             }
           },
           err => {
             if(err.length >0){
-              alert('Error'+ err)
+              this.api._commonalertmsg(err);
             }
           }
       );
     }else{
-      alert('All Fields are mandatory');
+      this.api._commonalertmsg('All Fields are mandatory');
       this.loading = false;
     }
   }
 
   reset(){
-    this.createeventForm.reset();
+    this.initiallize();
   }
-
 }
 
+
+// Mat Dialog Componet
 @Component({
   selector: 'dialog-content-example-dialog',
   templateUrl: './eventdialog.html',
@@ -220,17 +214,12 @@ export class EventDialog {
   elementType: 'img';
 
   display: boolean;
-  // qrcodename: string = "http://pyticketingsystem.com/events/id=";
   constructor(
     public dialogRef: MatDialogRef<EventDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
-      // this.value = this.qrcodename;
       this.display = true;
-      // console.log('Data' , data);      
     }
 
-
-    
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -250,7 +239,6 @@ export class EventDialog {
     WindowObject.focus();
     WindowObject.print();
     WindowObject.close();
-    
     document.getElementById('print_link').style.display='block';
   }
 }

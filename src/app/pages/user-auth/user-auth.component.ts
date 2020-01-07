@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { EventsapiService } from 'src/app/services/eventsapi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 
+const PrimaryWhite = '#ffffff';
+const SecondaryGrey = '#ccc';
+const PrimaryRed = '#dd0031';
+const SecondaryBlue = '#006ddd';
 
 @Component({
   selector: 'app-user-auth',
@@ -15,7 +20,18 @@ export class UserAuthComponent implements OnInit {
   userAuth: FormGroup;
   submitted: boolean;
   passwordchnge: boolean = false;
-  loading = false;
+  
+
+  @ViewChild('ngxLoading', { static: false }) ngxLoadingComponent: NgxLoadingComponent;
+  @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
+  public primaryColour = PrimaryWhite;
+  public secondaryColour = SecondaryGrey;
+  public coloursEnabled = false;
+  public loadingTemplate: TemplateRef<any>;
+  public config = { animationType: ngxLoadingAnimationTypes.none, primaryColour: this.primaryColour, secondaryColour: this.secondaryColour, tertiaryColour: this.primaryColour, backdropBorderRadius: '3px' };
+
   constructor(
     public api: EventsapiService,
     private formBuilder: FormBuilder,
@@ -48,33 +64,31 @@ export class UserAuthComponent implements OnInit {
         "password": this.userAuth.value.password
       };
   
-      this.api._postAPI('auth/login',params).pipe(
-        catchError(err => {
-            // alert('Handling error locally and rethrowing it...'+ JSON.stringify(err));
-            return throwError(err);
-        })
-      )
-      .subscribe(
+      this.api._postAPI('auth/login',params).subscribe(
           res  => {
-            // alert('HTTP response'+ JSON.stringify(res))
-            // $("#content").show();
             if(res.status == 200){
               this.route.navigateByUrl('main');
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("UserName", res.data.name);
             }else{
-              alert('Error!!!' + res.data);
+              this.api._commonErrormsg('Encountered an error!','Something went wrong, please try again');
             }
           },
           err => {
             if(err.length >0){
               //alert('HTTP Error'+ err)
+              this.api._commonalertmsg(err);
             }
           }
       );
     }else{
       // alert('Please provide valid credentials...');
+      this.api._commonalertmsg('Please provide valid credentials.');
     }
+    this.loading = true;
+       setTimeout(()=>{    //<<<---    using ()=> synta
+        this.loading = false;
+    }, 5000);
     
   }
 

@@ -1,12 +1,12 @@
 <h2 mat-dialog-title>
-    Top 3 Winner's List
+    Winner's are ...
 </h2>
 
 <mat-dialog-content>
     <mat-list role="list">
         <mat-list-item role="listitem" *ngFor="let winner of data">
             <div>
-                <span matBadge=" {{ winner.Rank }}" matBadgeOverlap="false">{{ winner.WinnerName }}</span>
+                {{ winner.name }}
             </div>
         </mat-list-item>
       </mat-list>
