@@ -35,6 +35,7 @@
                   <table class="table user-list">
                     <thead>
                       <tr>
+                        <th><span>Select</span></th>
                         <th><span>Name</span></th>
                         <th><span>CheckIn</span></th>
                         <th class="text-center"><span>Status</span></th>
@@ -47,6 +48,9 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let user of lotteryhistory">
+                        <td>
+                          <input type="checkbox" class="custom-control-input">
+                        </td>
                         <td>
                           {{ user.name }}
                         </td>

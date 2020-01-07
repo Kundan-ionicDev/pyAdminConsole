@@ -6,6 +6,9 @@
       <div class="tab-content">
         <div class="tab-pane active">
           <form role="form" [formGroup]="createeventForm" (ngSubmit)="CreateEvent()" class="form-horizontal">
+            <!-- <input id="tel" class="form-control" phoneMask [preValue]="createeventForm.value.phone"  [phoneControl]="createeventForm.controls['phone']" formControlName="phone" maxlength="14" 
+            [ngClass]="(createeventForm.controls['phone'].invalid)? 'errmsg' : 'validmsg'">		 -->
+
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Event Name </label>
               <div class="col-sm-8">
@@ -69,6 +72,8 @@
               </div>
             </div>
 
+            
+
             <div class="form-group">
               <label for="focusedinput" class="col-sm-2 control-label">Contact Person </label>
               <div class="col-sm-3">
@@ -82,13 +87,16 @@
               </div>
               <label for="focusedinput" class="col-sm-2 control-label">Contact Number </label>
               <div class="col-sm-3">
-                <input type="number"  data-toggle="tooltip"
+                <!-- <input type="tel"   data-toggle="tooltip"
                   title="Enter Contact Person Number !" data-placement="bottom" class="form-control1"
                   formControlName="contactpnumber" id="focusedinput" placeholder="Enter Contact Person Number!"
-                  [ngClass]="{ 'is-invalid': submitted && f.contactpnumber.errors }" />
-                <div *ngIf="submitted && f.contactpnumber.errors" class="alert-light">
-                  <div *ngIf="f.contactpnumber.errors.required">*Contact Number is required</div>
-                  <div *ngIf="f.contactpnumber.errors.pattern">*Contact Number must be a valid</div>
+                  [ngClass]="{ 'is-invalid': submitted && f.contactpnumber.errors }" /> -->
+                  <input id="tel" data-toggle="tooltip"
+                  title="Enter Contact Person Number !" placeholder="Enter Contact Person Number!" data-placement="bottom" class="form-control1" phoneMask [preValue]="createeventForm.value.phone"  [phoneControl]="createeventForm.controls['phone']" formControlName="phone" maxlength="14" 
+                      [ngClass]="(createeventForm.controls['phone'].invalid)? 'errmsg' : 'validmsg'">		
+                <div *ngIf="submitted && f.phone.errors" class="alert-light">
+                  <div *ngIf="f.phone.errors.required">*Contact Number is required</div>
+                  <div *ngIf="f.phone.errors.pattern">*Contact Number must be a valid mobile number</div>
                 </div>
               </div>
             </div>

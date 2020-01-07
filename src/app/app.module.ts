@@ -28,7 +28,7 @@ import { LotteryhistoryComponent } from './pages/lotteryhistory/lotteryhistory.c
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { Ng2OdometerModule } from 'ng2-odometer'; 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
-
+import { PhoneMaskDirective } from './PhoneMaskDirective'; 
 
 import { MatDialogModule,
   MatButtonModule, 
@@ -63,7 +63,7 @@ import { MatDialogModule,
     LotteryrulesComponent,
     LotteryhistoryComponent,
     ResetpasswordComponent,
-    
+    PhoneMaskDirective
   ],
 
   entryComponents: [

@@ -91,14 +91,15 @@ export class CreateventComponent implements OnInit {
       startdate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
       endate : new FormControl(new Date(), {validators: [Validators.required, DateTimeValidator]}),
       contactpname : new FormControl('',Validators.required),
-      contactpnumber : new FormControl('', Validators.required),
+      // contactpnumber : new FormControl('', Validators.required),
       duration: new FormControl('',Validators.required),
       category: new FormControl('0',Validators.required),
       address: new FormControl('',Validators.required),
       admittance: new FormControl('',Validators.required),
       userlimit: new FormControl('',Validators.required),
       feesoption : new FormControl('',Validators.required),
-      admittype : new FormControl('',Validators.required)
+      admittype : new FormControl('',Validators.required),
+      phone:['',Validators.required],
     });
     this.api._getAPI('master/category/list').subscribe(
         res  => {
@@ -128,7 +129,7 @@ export class CreateventComponent implements OnInit {
         "startDate": this.createeventForm.value.startdate,
         "endDate": this.createeventForm.value.endate,
         "contactPersonName": this.createeventForm.value.contactpname,
-        "contactPerson": ""+this.createeventForm.value.contactpnumber+"",
+        "contactPerson": ""+this.createeventForm.value.phone+"",
         "duration": this.createeventForm.value.duration,
         "eventCategoryId": this.createeventForm.value.category,
         "address": this.createeventForm.value.address,

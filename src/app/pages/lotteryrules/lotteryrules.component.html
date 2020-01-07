@@ -1,4 +1,5 @@
 <div id="page-wrapper">
+  
   <div class="graphs">
     <div class="xs">
       <h3>Set Lottery Rules</h3>
@@ -50,12 +51,12 @@
               tickInterval="1"
               min="1"
               max="12"></mat-slider> -->
-              <select formControlName="rule2" class="form-control1">
-                <option selected value="0">Select Rule3</option>
-                <option value="0">None</option>
-                <option value="2">2 Hours</option>
-                <option value="4">4 Hours</option>
-              </select>
+            <select formControlName="rule2" class="form-control1">
+              <option selected value="0">Select Rule3</option>
+              <option value="0">None</option>
+              <option value="2">2 Hours</option>
+              <option value="4">4 Hours</option>
+            </select>
           </div>
           <div class="col-lg-2">
             <div>&nbsp;</div>
@@ -67,7 +68,7 @@
       </div>
 
       <br /><br />
-
+     
       <div class="row">
         <div class="col-lg-12">
           <div class="main-box clearfix">
@@ -116,5 +117,6 @@
     </div>
   </div>
 </div>
-<ngx-loading [show]="loading" [config]="{animationType: ngxLoadingAnimationTypes.circleSwish, primaryColour: primaryColour, backdropBorderRadius: '3px'}"
-      [template]="loadingTemplate"></ngx-loading>
+<ngx-loading [show]="loading"
+  [config]="{animationType: ngxLoadingAnimationTypes.circleSwish, primaryColour: primaryColour, backdropBorderRadius: '3px'}"
+  [template]="loadingTemplate"></ngx-loading>

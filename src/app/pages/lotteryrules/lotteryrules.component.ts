@@ -130,7 +130,7 @@ export class LotteryrulesComponent implements OnInit {
     // console.log('params :', JSON.stringify(params));
     this.api._postAPI('lottery/generate',params).subscribe(
         res  => {
-          // alert('Alert'+ JSON.stringify(res));
+          alert('Alert'+ JSON.stringify(res));
           this.api._commonalertmsg(res.message);
           this.api._getAPI('lottery/history?uuid='+res.data.uuid).subscribe(
             res  => {
@@ -138,8 +138,8 @@ export class LotteryrulesComponent implements OnInit {
               var winnerdata = res.data;
               const dialogRef = this.matDialog.open(LotteryWinnerDialog, {
                 data: winnerdata,
-                width: '400px',
-                hasBackdrop: true,
+                width: '700px',
+                hasBackdrop: false,
                 autoFocus : false
               });
             
@@ -190,6 +190,24 @@ export class LotteryWinnerDialog {
 
   close() {
     this.dialogRef.close();
+  }
+
+  printPdf() {
+    var DocumentContainer = document.getElementById('content');
+    var html = '<html><head>'+
+               '<link href="css/template.css" rel="stylesheet" type="text/css" />'+
+               '</head><body style="background:#ffffff;">'+
+               DocumentContainer.innerHTML+
+               '</body></html>';
+
+    var WindowObject = window.open("", "PrintWindow",
+    "width=auto,height=auto,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes, _blank");
+    WindowObject.document.writeln(DocumentContainer.innerHTML);
+    WindowObject.document.close();
+    WindowObject.focus();
+    WindowObject.print();
+    WindowObject.close();
+    document.getElementById('print_link').style.display='block';
   }
 }
 
