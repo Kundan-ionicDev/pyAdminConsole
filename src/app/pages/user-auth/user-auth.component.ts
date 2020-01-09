@@ -46,7 +46,7 @@ export class UserAuthComponent implements OnInit {
         Validators.email,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      password: new FormControl('',[Validators.required, Validators.minLength(6)])
+      password: new FormControl('',Validators.required)
     });
   }
 
