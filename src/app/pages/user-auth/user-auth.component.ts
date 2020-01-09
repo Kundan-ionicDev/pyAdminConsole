@@ -41,12 +41,12 @@ export class UserAuthComponent implements OnInit {
   ngOnInit() {
     localStorage.removeItem('token');
     this.userAuth = this.formBuilder.group({
-      email: new FormControl('admin1@gmail.com', Validators.compose([
+      email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.email,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      password: new FormControl('password',[Validators.required, Validators.minLength(6)])
+      password: new FormControl('',[Validators.required, Validators.minLength(6)])
     });
   }
 

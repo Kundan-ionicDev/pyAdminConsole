@@ -14,7 +14,7 @@
 </div>
 <br />
 <mat-dialog-content>
-    <!-- <div class="list-group" *ngFor="let winner of data">
+    <div class="list-group" *ngFor="let winner of data">
         <a  class="list-group-item list-group-item-action flex-column align-items-start active">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ winner.name }}</h5>
@@ -23,9 +23,9 @@
           <p class="mb-1">{{ winner.email }}</p>
           <small>{{ winner.docType }} : {{ winner.docId }}</small>
         </a>
-      </div> -->
+      </div>
 
-      <div class="row" id="content">
+      <!-- <div class="row" id="content">
         <div class="col-6" *ngFor="let winner of data">
           <hr />
           <div class="card" >
@@ -43,7 +43,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 </mat-dialog-content>
 <mat-dialog-actions text-center>
     <button mat-raised-button (click)="close()" color="primary">Ok</button>
