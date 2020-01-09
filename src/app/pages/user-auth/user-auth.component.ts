@@ -76,7 +76,6 @@ export class UserAuthComponent implements OnInit {
           },
           err => {
             if(err.length >0){
-              //alert('HTTP Error'+ err)
               this.api._commonalertmsg(err);
             }
           }
@@ -86,7 +85,7 @@ export class UserAuthComponent implements OnInit {
       this.api._commonalertmsg('Please provide valid credentials.');
     }
     this.loading = true;
-       setTimeout(()=>{    //<<<---    using ()=> synta
+       setTimeout(()=>{ 
         this.loading = false;
     }, 5000);
     
@@ -102,7 +101,6 @@ export class UserAuthComponent implements OnInit {
 
   resetpassword(){
      this.passwordchnge = false;
-
    }
 
 }
